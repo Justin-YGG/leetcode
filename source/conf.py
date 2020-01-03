@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import sphinx_rtd_theme
-
-from recommonmark.parser import CommonMarkParser
 #
 # Configuration file for the Sphinx documentation builder.
 #
@@ -50,6 +47,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
+    'recommonmark',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -59,10 +57,15 @@ templates_path = ['_templates']
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_parsers = {
-    '.md': CommonMarkParser,
+# source_parsers = {
+#     '.md': CommonMarkParser,
+# }
+
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.txt': 'markdown',
+    '.md': 'markdown',
 }
-source_suffix = ['.rst', '.md']
 
 # The master toctree document.
 master_doc = 'index'
@@ -72,7 +75,8 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = u'zh_CN'
+language = u'en'
+# html_search_options = {'dict': 'user_dict'}
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
@@ -87,15 +91,22 @@ pygments_style = None
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+html_theme = 'alabaster'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 # html_theme_options = {}
-
+html_theme_options = {
+    'logo': 'logo.png',
+    'show_powered_by': False,
+    'github_user': 'Justin-YGG',
+    'github_repo': 'leetcode',
+    'github_banner': False,
+    'show_related': False,
+    'note_bg': '#FFF59C',
+}
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".

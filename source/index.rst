@@ -5,8 +5,8 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
 
    python/TwoSum
+   python/3Sum
    python/Reverse-Words-in-a-String
