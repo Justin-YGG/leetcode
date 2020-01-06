@@ -19,8 +19,17 @@ https://leetcode-cn.com/problems/3sum/
 
 --------------------------
 
+**排序 + 双指针**
+
+.. note::
+
+   - 时间复杂度：O(n^2)，数组排序 O(Nlog N)O(NlogN)，遍历数组 O(n)，双指针遍历 O(n)
+   - 空间复杂度：O(1)
+
+--------------------------
+
 .. code-block:: python
-   
+
         class Solution(object):
             def threeSum(self, nums):
                 """

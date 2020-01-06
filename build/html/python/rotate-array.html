@@ -1,0 +1,212 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>189. 旋转数组 &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="206. 反转链表" href="reverse-linked-list.html" />
+    <link rel="prev" title="155. 最小栈" href="min-stack.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>189. 旋转数组<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/rotate-array/">https://leetcode-cn.com/problems/rotate-array/</a></p>
+<p>给定一个数组，将数组中的元素向右移动&nbsp;k&nbsp;个位置，其中&nbsp;k&nbsp;是非负数。</p>
+<p>示例 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span> <span class="n">和</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">输出</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>解释:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">向右旋转</span> <span class="mi">1</span> <span class="n">步</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">向右旋转</span> <span class="mi">2</span> <span class="n">步</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">向右旋转</span> <span class="mi">3</span> <span class="n">步</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>示例&nbsp;2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">99</span><span class="p">]</span> <span class="n">和</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">输出</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>解释:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">向右旋转</span> <span class="mi">1</span> <span class="n">步</span><span class="p">:</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">向右旋转</span> <span class="mi">2</span> <span class="n">步</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>说明:</p>
+<p>尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。
+要求使用空间复杂度为&nbsp;O(1) 的原地算法。</p>
+<hr class="docutils" />
+<p>把数组中的元素比作学生，坐标比作座位。然后开始换座位，nums[0] 上的同学起身坐到 nums[k+0] 座位上，nums[k+0] 上的同学被挤走，
+去到nums[k+k]座位上，反复执行；有一种情况，其中有同学被挤出来后做到了空座位，没人被挤走，此时如果还有同学坐在自己原来的位置上,
+那么就要顺着从第二个位置上的同学换位置，直到所有同学做到他最终该坐的位置上，n 个同学换 n 次，用 count 计数，count == len(nums) 时，所有同学完成换座</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>时间复杂度：O(n)，总共移动了 n 次</li>
+<li>空间复杂度: O(1)</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type nums: List[int]</span>
+<span class="sd">        :type k: int</span>
+<span class="sd">        :rtype: None Do not return anything, modify nums in-place instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">%=</span> <span class="n">length</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># n 个位置共需要移动 n 次</span>
+        <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">:</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">start</span>
+            <span class="n">pre</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># 将当前位置移动到后k位置</span>
+                <span class="n">next_</span> <span class="o">=</span> <span class="p">(</span><span class="n">current</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">%</span> <span class="n">length</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">next_</span><span class="p">]</span>
+                <span class="n">nums</span><span class="p">[</span><span class="n">next_</span><span class="p">]</span> <span class="o">=</span> <span class="n">pre</span>
+
+                <span class="c1"># 更新当前位置</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="n">next_</span>
+                <span class="n">pre</span> <span class="o">=</span> <span class="n">tmp</span>
+
+                <span class="c1"># 完成一次移动，count加1</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="c1"># 当前位置如果是本轮开始位置，说明一件完成一轮</span>
+                <span class="k">if</span> <span class="n">current</span> <span class="o">==</span> <span class="n">start</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="c1"># 如果一轮无法完全所有元素的移动，顺延从第二个位置继续下一轮</span>
+            <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="TwoSum.html">1.两数之和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="container-with-most-water.html">11. 盛最多水的容器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3Sum.html">15. 三数之和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="valid-parentheses.html">20. 有效的括号</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merge-two-sorted-lists.html">21. 合并两个有序链表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swap-nodes-in-pairs.html">24. 两两交换链表中的节点</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remove-duplicates-from-sorted-array.html">26. 删除排序数组中的重复项</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trapping-rain-water.html">42. 接雨水</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plus-one.html">66. 加一</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climbing-stairs.html">70. 爬楼梯</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merge-sorted-array.html">88. 合并两个有序数组</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linked-list-cycle.html">141. 环形链表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Reverse-Words-in-a-String.html">151.翻转字符串里的单词</a></li>
+<li class="toctree-l1"><a class="reference internal" href="min-stack.html">155. 最小栈</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">189. 旋转数组</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-linked-list.html">206. 反转链表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="move-zeroes.html">283. 移动零</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="min-stack.html" title="previous chapter">155. 最小栈</a></li>
+      <li>Next: <a href="reverse-linked-list.html" title="next chapter">206. 反转链表</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin.
+      
+      |
+      <a href="../_sources/python/rotate-array.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -21,9 +21,10 @@ https://leetcode-cn.com/problems/two-sum/
 
 .. note::
 
-   时间复杂度： O(n)
+   - 时间复杂度：O(n)
+   - 空间复杂度：O(n)
 
-   空间复杂度：O(n)
+------------------------------------------
 
 .. code-block:: python
 
