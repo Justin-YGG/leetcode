@@ -45,11 +45,9 @@ f(n) = f(n-1) + f(n-2)
     - 时间复杂度：O(n)，树形递归的大小可以达到 n。
     - 空间复杂度：O(n)，递归树的深度可以达到 n。
 
-.. warning::
-
-    补充其他解法
-
 ------------------------
+
+**递归 + 备忘录**
 
 .. code::  python
 
@@ -65,3 +63,35 @@ f(n) = f(n-1) + f(n-2)
             if n not in self.dic:
                 self.dic[n] = self.climbStairs(n-1) + self.climbStairs(n-2)
             return self.dic[n]
+
+-------------------------
+
+**动态规划**
+
+- dp[i] 代表跳到 n 阶台阶总共有几种方法
+- 跳到 n 阶台阶有两种方法，从 n 阶台阶的前一个跳上来，或者从 n 阶台阶的前两个跳上来，所以递推公式是：``dp[i] = dp[i-1] + dp[i-2]``
+- base case: dp[1] = 1, dp[2] = 2
+
+.. note::
+
+    - 时间复杂度：O(n)。
+    - 空间复杂度：O(n)。
+
+--------------------------
+
+.. code:: python
+
+    class Solution(object):
+        def climbStairs(self, n):
+            """
+            :type n: int
+            :rtype: int
+            """
+            if n <= 2:
+                return n
+            dp = [0] * (n+1)
+            dp[1] = 1
+            dp[2] = 2
+            for i in range(3, n+1):
+                dp[i] = dp[i-2] + dp[i-1]
+            return dp[n]

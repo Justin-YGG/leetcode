@@ -6,7 +6,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-
+   python/dp
    python/TwoSum
    python/container-with-most-water
    python/3Sum
@@ -17,6 +17,7 @@ Contents:
    python/trapping-rain-water
    python/plus-one
    python/climbing-stairs
+   python/edit-distance
    python/largest-rectangle-in-histogram
    python/merge-sorted-array
    python/binary-tree-level-order-traversal
@@ -25,5 +26,8 @@ Contents:
    python/min-stack
    python/rotate-array
    python/reverse-linked-list
+   python/implement-trie-prefix-tree
    python/move-zeroes
+   python/coin-change
    python/n-ary-tree-level-order-traversal
+   python/fibonacci-number

@@ -1,0 +1,226 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>72. 编辑距离 &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="84. 柱状图中最大的矩形" href="largest-rectangle-in-histogram.html" />
+    <link rel="prev" title="70. 爬楼梯" href="climbing-stairs.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>72. 编辑距离<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/edit-distance/">https://leetcode-cn.com/problems/edit-distance/</a></p>
+<p>给定两个单词&nbsp;word1 和&nbsp;word2，计算出将&nbsp;word1&nbsp;转换成&nbsp;word2 所使用的最少操作数&nbsp;。</p>
+<p>你可以对一个单词进行如下三种操作：</p>
+<p>插入一个字符
+删除一个字符
+替换一个字符</p>
+<p>示例&nbsp;1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="n">word1</span> <span class="o">=</span> <span class="s2">&quot;horse&quot;</span><span class="p">,</span> <span class="n">word2</span> <span class="o">=</span> <span class="s2">&quot;ros&quot;</span>
+<span class="n">输出</span><span class="p">:</span> <span class="mi">3</span>
+<span class="n">解释</span><span class="p">:</span>
+<span class="n">horse</span> <span class="o">-&gt;</span> <span class="n">rorse</span> <span class="p">(</span><span class="n">将</span> <span class="s1">&#39;h&#39;</span> <span class="n">替换为</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">rorse</span> <span class="o">-&gt;</span> <span class="n">rose</span> <span class="p">(</span><span class="n">删除</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">rose</span> <span class="o">-&gt;</span> <span class="n">ros</span> <span class="p">(</span><span class="n">删除</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>示例&nbsp;2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="n">word1</span> <span class="o">=</span> <span class="s2">&quot;intention&quot;</span><span class="p">,</span> <span class="n">word2</span> <span class="o">=</span> <span class="s2">&quot;execution&quot;</span>
+<span class="n">输出</span><span class="p">:</span> <span class="mi">5</span>
+<span class="n">解释</span><span class="p">:</span>
+<span class="n">intention</span> <span class="o">-&gt;</span> <span class="n">inention</span> <span class="p">(</span><span class="n">删除</span> <span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">inention</span> <span class="o">-&gt;</span> <span class="n">enention</span> <span class="p">(</span><span class="n">将</span> <span class="s1">&#39;i&#39;</span> <span class="n">替换为</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span>
+<span class="n">enention</span> <span class="o">-&gt;</span> <span class="n">exention</span> <span class="p">(</span><span class="n">将</span> <span class="s1">&#39;n&#39;</span> <span class="n">替换为</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">exention</span> <span class="o">-&gt;</span> <span class="n">exection</span> <span class="p">(</span><span class="n">将</span> <span class="s1">&#39;n&#39;</span> <span class="n">替换为</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">exection</span> <span class="o">-&gt;</span> <span class="n">execution</span> <span class="p">(</span><span class="n">插入</span> <span class="s1">&#39;u&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<ul>
+<li><p class="first">dp[i][j] 代表 word1[0..i] 和 word2[0..j] 的最小编辑【距离】</p>
+</li>
+<li><p class="first">要算出 dp[i][j]，有四种情况，从四种情况中选择最优解(最小编辑距离)</p>
+<blockquote>
+<div><ul class="simple">
+<li>dp[i][j] = dp[i][j-1] + 1  # 敌动我不动，招安一名敌军(插入)</li>
+<li>dp[i][j] = dp[i-1][j] + 1  # 我军叛变，斩杀一名本军(删除)</li>
+<li>dp[i][j] = dp[i-1][j-1]+int(word1[i] != word2[j])  # 当前对阵士兵是孪生兄弟，直接忽略(skip)；亦或是，敌我双方都觉得当前对阵的对方士兵比较厉害，相互交换(互换)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">dp[..][0] 和 dp[0][..] 对应 base case</p>
+<blockquote>
+<div><ul class="simple">
+<li>第一行中，dp[0][i]dp[0][i]表示空字符””””到word2[0,…,i]word2[0,…,i]   需要编辑几次，易知空字符需要执行ii次插入操作才能得到。因此，dp[0][i]=idp[0][i]=i。</li>
+<li>第一列中，dp[i][0]dp[i][0]表示word[0,…,i]word[0,…,i]到空字符的编辑距离，易知word[0,…,i]word[0,…,i]需要执行ii次删除操作才能得到空字符。因此，dp[i][0]=idp[i][0]=i</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>时间复杂度：O(m*n)</li>
+<li>空间复杂度：O(m*n)</li>
+</ul>
+</div>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">优化空间复杂度为 O(n)</p>
+</div>
+<hr class="docutils" />
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">minDistance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type word1: str</span>
+<span class="sd">        :type word2: str</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">length1</span><span class="p">,</span> <span class="n">length2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">length2</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length1</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length1</span><span class="p">):</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length2</span><span class="p">):</span>
+            <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length2</span><span class="p">):</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">word1</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">word2</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dp.html">动态规划 Dynamic Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TwoSum.html">1.两数之和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="container-with-most-water.html">11. 盛最多水的容器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3Sum.html">15. 三数之和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="valid-parentheses.html">20. 有效的括号</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merge-two-sorted-lists.html">21. 合并两个有序链表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swap-nodes-in-pairs.html">24. 两两交换链表中的节点</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remove-duplicates-from-sorted-array.html">26. 删除排序数组中的重复项</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trapping-rain-water.html">42. 接雨水</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plus-one.html">66. 加一</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climbing-stairs.html">70. 爬楼梯</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">72. 编辑距离</a></li>
+<li class="toctree-l1"><a class="reference internal" href="largest-rectangle-in-histogram.html">84. 柱状图中最大的矩形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merge-sorted-array.html">88. 合并两个有序数组</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binary-tree-level-order-traversal.html">102. 二叉树的层次遍历</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linked-list-cycle.html">141. 环形链表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Reverse-Words-in-a-String.html">151.翻转字符串里的单词</a></li>
+<li class="toctree-l1"><a class="reference internal" href="min-stack.html">155. 最小栈</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rotate-array.html">189. 旋转数组</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-linked-list.html">206. 反转链表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="move-zeroes.html">283. 移动零</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coin-change.html">322. 零钱兑换</a></li>
+<li class="toctree-l1"><a class="reference internal" href="n-ary-tree-level-order-traversal.html">429. N叉树的层序遍历</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fibonacci-number.html">509. 斐波那契数</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="climbing-stairs.html" title="previous chapter">70. 爬楼梯</a></li>
+      <li>Next: <a href="largest-rectangle-in-histogram.html" title="next chapter">84. 柱状图中最大的矩形</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin.
+      
+      |
+      <a href="../_sources/python/edit-distance.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
