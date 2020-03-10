@@ -6,6 +6,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   python/template
    python/dp
    python/TwoSum
    python/container-with-most-water
@@ -21,6 +22,7 @@ Contents:
    python/largest-rectangle-in-histogram
    python/merge-sorted-array
    python/binary-tree-level-order-traversal
+   python/maximum-depth-of-binary-tree
    python/linked-list-cycle
    python/Reverse-Words-in-a-String
    python/min-stack
@@ -31,3 +33,4 @@ Contents:
    python/coin-change
    python/n-ary-tree-level-order-traversal
    python/fibonacci-number
+   python/diameter-of-binary-tree
