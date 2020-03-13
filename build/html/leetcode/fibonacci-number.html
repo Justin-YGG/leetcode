@@ -1,0 +1,231 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>509. 斐波那契数 &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="543. 二叉树的直径" href="diameter-of-binary-tree.html" />
+    <link rel="prev" title="429. N叉树的层序遍历" href="n-ary-tree-level-order-traversal.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>509. 斐波那契数<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/fibonacci-number/">https://leetcode-cn.com/problems/fibonacci-number/</a></p>
+<p>斐波那契数，通常用&nbsp;F(n) 表示，形成的序列称为斐波那契数列。该数列由&nbsp;0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">F</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">F</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">F</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">其中</span> <span class="n">N</span> <span class="o">&gt;</span> <span class="mf">1.</span>
+</pre></div>
+</div>
+<p>给定&nbsp;N，计算&nbsp;F(N)。</p>
+<p>示例 1：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>输入：2
+输出：1
+解释：F(2) = F(1) + F(0) = 1 + 0 = 1.
+</pre></div>
+</div>
+<p>示例 2：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>输入：3
+输出：2
+解释：F(3) = F(2) + F(1) = 1 + 1 = 2.
+</pre></div>
+</div>
+<p>示例 3：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>输入：4
+输出：3
+解释：F(4) = F(3) + F(2) = 2 + 1 = 3.
+</pre></div>
+</div>
+<p>提示：</p>
+<p>0 ≤ N ≤ 30</p>
+<hr class="docutils" />
+<p><strong>方法一</strong> 递归 + 记忆化搜索</p>
+<p>用字典或者数组将计算过的值存起来，避免重复计算</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type N: int</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">N</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fib</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">fib</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="p">[</span><span class="n">N</span><span class="p">]</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>方法二</strong> 动态规划</p>
+<p>据斐波那契数列的状态转移方程，当前状态只和之前的两个状态有关，其实并不需要那么长的一个 DP table 来存储所有的状态，只要想办法存储之前的两个状态就行了。
+而通过 Python 的多变量赋值语法，a, b = b , a + b，我们可以一行解决这个问题。</p>
+<p>斐波那契数列的例子严格来说不算动态规划，因为没有涉及求最值</p>
+<p><strong>为什么返回的是 a 而不是 b：a 是 0th 个斐波那契数，经过 N 次循环赋值后，a 正好是 nth 个斐波那契数</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type N: int</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+        <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">LeetCode</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="template.html">模板</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dp.html">动态规划 Dynamic Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TwoSum.html">1.两数之和</a></li>
+<li class="toctree-l2"><a class="reference internal" href="container-with-most-water.html">11. 盛最多水的容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3Sum.html">15. 三数之和</a></li>
+<li class="toctree-l2"><a class="reference internal" href="valid-parentheses.html">20. 有效的括号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge-two-sorted-lists.html">21. 合并两个有序链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swap-nodes-in-pairs.html">24. 两两交换链表中的节点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove-duplicates-from-sorted-array.html">26. 删除排序数组中的重复项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trapping-rain-water.html">42. 接雨水</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plus-one.html">66. 加一</a></li>
+<li class="toctree-l2"><a class="reference internal" href="climbing-stairs.html">70. 爬楼梯</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edit-distance.html">72. 编辑距离</a></li>
+<li class="toctree-l2"><a class="reference internal" href="largest-rectangle-in-histogram.html">84. 柱状图中最大的矩形</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge-sorted-array.html">88. 合并两个有序数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary-tree-level-order-traversal.html">102. 二叉树的层次遍历</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maximum-depth-of-binary-tree.html">104. 二叉树的最大深度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary-tree-maximum-path-sum.html">124. 二叉树中的最大路径和</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linked-list-cycle.html">141. 环形链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Reverse-Words-in-a-String.html">151.翻转字符串里的单词</a></li>
+<li class="toctree-l2"><a class="reference internal" href="min-stack.html">155. 最小栈</a></li>
+<li class="toctree-l2"><a class="reference internal" href="majority-element.html">169. 多数元素</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rotate-array.html">189. 旋转数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reverse-linked-list.html">206. 反转链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implement-trie-prefix-tree.html">208. 实现 Trie (前缀树)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="move-zeroes.html">283. 移动零</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coin-change.html">322. 零钱兑换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="n-ary-tree-level-order-traversal.html">429. N叉树的层序遍历</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">509. 斐波那契数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diameter-of-binary-tree.html">543. 二叉树的直径</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../offer/index.html">剑指 Offer</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">LeetCode</a><ul>
+      <li>Previous: <a href="n-ary-tree-level-order-traversal.html" title="previous chapter">429. N叉树的层序遍历</a></li>
+      <li>Next: <a href="diameter-of-binary-tree.html" title="next chapter">543. 二叉树的直径</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin.
+      
+      |
+      <a href="../_sources/leetcode/fibonacci-number.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
