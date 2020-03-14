@@ -73,6 +73,7 @@
 <span class="sd">        :rtype: None Do not return anything, modify nums1 in-place instead.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
+            <span class="c1"># nums1先消耗完 or nums2中数字较大</span>
             <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">nums1</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums2</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="n">nums1</span><span class="p">[</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                 <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
@@ -187,9 +188,6 @@
     <div class="footer">
       &copy;2020, Justin.
       
-      |
-      <a href="../_sources/leetcode/merge-sorted-array.rst.txt"
-          rel="nofollow">Page source</a>
     </div>
 
     

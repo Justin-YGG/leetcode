@@ -1,4 +1,4 @@
-Welcome to leetcode's documentation!
+Practice makes perfect
 ====================================
 
 .. toctree::

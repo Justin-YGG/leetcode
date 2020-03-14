@@ -1,0 +1,98 @@
+=====================================
+105. 从前序与中序遍历序列构造二叉树
+=====================================
+
+https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+
+输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+
+例如，给出
+::
+
+    前序遍历 preorder = [3,9,20,15,7]
+
+    中序遍历 inorder = [9,3,15,20,7]
+
+返回如下的二叉树：
+::
+
+        3
+       / \
+      9  20
+        /  \
+       15   7
+
+
+限制：
+::
+
+    0 <= 节点个数 <= 5000
+
+---------------------------------
+
+题解：https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/solution/mian-shi-ti-07-zhong-jian-er-cha-shu-di-gui-fa-qin/
+
+``根据题目描述输入的前序遍历和中序遍历的结果中都不含重复的数字，其表明树中每个节点值都是唯一的``
+
+根据以上特点，可以按顺序完成以下工作：
+
+    - 前序遍历的首个元素即为根节点 root 的值；
+    - 在中序遍历中搜索根节点 root 的索引 ，可将中序遍历划分为 [ 左子树 | 根节点 | 右子树 ]
+    - 根据中序遍历中的左（右）子树的节点数量，可将前序遍历划分为 [ 根节点 | 左子树 | 右子树 ]
+
+自此可确定 三个节点的关系 ：1.树的根节点、2.左子树根节点、3.右子树根节点（即前序遍历中左（右）子树的首个元素）。
+
+.. note::
+
+    - 时间复杂度：O(N)，N为树的节点数量。初始化 HashMap 需遍历 inorder ，占用 O(N)；
+                递归共建立 N 个节点，每层递归中的节点建立、搜索操作占用 O(1)，因此递归占用 O(N)；
+                （最差情况为所有子树只有左节点，树退化为链表，此时递归深度 O(N) ；平均情况下递归深度 O(log_2 N)
+
+    - 空间复杂度：O(N)，HashMap 使用 O(N) 额外空间；递归操作中系统需使用 O(N) 额外空间
+
+
+.. code:: python
+
+    # Definition for a binary tree node.
+    # class TreeNode(object):
+    #     def __init__(self, x):
+    #         self.val = x
+    #         self.left = None
+    #         self.right = None
+
+    class Solution(object):
+        def buildTree(self, preorder, inorder):
+            """
+            :type preorder: List[int]
+            :type inorder: List[int]
+            :rtype: TreeNode
+            """
+            self.preorder = preorder
+            self.inorder_dict = {}
+            #: 记录中序值的位置
+            for i, n in enumerate(inorder):
+                self.inorder_dict[n] = i
+            return self.recur(0, 0, len(inorder) - 1)
+
+        def recur(self, pre_root, in_left, in_right):
+            #: terminator
+            if in_left > in_right:
+                return
+            #: 根节点
+            root = TreeNode(self.preorder[pre_root])
+
+            #: 计算根节点在中序中的位置 i
+            i = self.inorder_dict[self.preorder[pre_root]]
+
+            #: drill down
+
+            #: 根据前序[根节点 | 左子树 | 右子树]，pre_root + 1 为左子树root节点位置
+            #: 根据中序[左子树 | 根节点 | 右子树]，左子树右边界为 i - 1 位置
+            root.left = self.recur(pre_root + 1, in_left, i - 1)
+
+            #: 根据前序[根节点 | 左子树 | 右子树]，pre_root + 跨过左子树的长度 +1 为右子树root节点位置
+            #: 根据中序[左子树 | 根节点 | 右子树]，右子树左边界为 i + 1 位置，左子树的长度为 i - in_left
+            root.right = self.recur(pre_root + i - in_left + 1, i + 1, in_right)
+
+            #: process current level
+            return root

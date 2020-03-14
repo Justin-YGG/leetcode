@@ -50,6 +50,7 @@ https://leetcode-cn.com/problems/merge-sorted-array/
             :rtype: None Do not return anything, modify nums1 in-place instead.
             """
             while n:
+                # nums1先消耗完 or nums2中数字较大
                 if m <= 0 or nums1[m-1] < nums2[n-1]:
                     nums1[m+n-1] = nums2[n-1]
                     n -= 1
