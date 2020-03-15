@@ -101,7 +101,7 @@
 
 选择排序每次会从未排序区间中找到最小的元素，将其放到已排序区间的末尾
 
-.. image:: ../_static/images/slection_sort.jpg
+.. image:: ../_static/images/selection_sort.jpg
 
 .. note::
 
