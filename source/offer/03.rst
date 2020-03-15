@@ -25,6 +25,8 @@ https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
 
 **方法一：** 哈希表
 
+.. tip::
+
     遍历数组时判断是否在哈希表中存在，如果存在就找到了一个重复的数字。
 
     ``此法需要额外的空间开销``
@@ -51,6 +53,8 @@ https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
 ---------------------------------------
 
 **方法二：** 下标定位法
+
+.. tip::
 
     如题描述，长度为 n 的数组，数字都在 0～n-1 的范围内，如果没有重复的数字，
     则数字 i 应该出现在 nums[i] 位置，即 num[i] = i;

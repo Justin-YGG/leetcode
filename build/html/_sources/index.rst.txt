@@ -7,3 +7,4 @@ Practice makes perfect
 
     leetcode/index
     offer/index
+    collections/index

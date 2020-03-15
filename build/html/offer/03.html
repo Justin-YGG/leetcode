@@ -50,10 +50,11 @@
 <div>2 &lt;= n &lt;= 100000</div></blockquote>
 <hr class="docutils" />
 <p><strong>方法一：</strong> 哈希表</p>
-<blockquote>
-<div><p>遍历数组时判断是否在哈希表中存在，如果存在就找到了一个重复的数字。</p>
-<p><code class="docutils literal notranslate"><span class="pre">此法需要额外的空间开销</span></code></p>
-</div></blockquote>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>遍历数组时判断是否在哈希表中存在，如果存在就找到了一个重复的数字。</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">此法需要额外的空间开销</span></code></p>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
@@ -76,16 +77,17 @@
 </div>
 <hr class="docutils" />
 <p><strong>方法二：</strong> 下标定位法</p>
-<blockquote>
-<div><p>如题描述，长度为 n 的数组，数字都在 0～n-1 的范围内，如果没有重复的数字，
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>如题描述，长度为 n 的数组，数字都在 0～n-1 的范围内，如果没有重复的数字，
 则数字 i 应该出现在 nums[i] 位置，即 num[i] = i;</p>
 <p>假设数组长度为 7，则数字范围是 [0, 6]。</p>
 <p>我们有 7 个篮子，上面的编号为依次为 0 ~ 6，每个篮子里面有个球，球上面有编号，编号范围是 [0, 6]。</p>
 <p>我们从第一个篮子开始检验，如果篮子里面球的编号和篮子编号一致，检验合格；
 如果发现篮子里面球的编号和篮子编号不一致，我们怀疑 <code class="docutils literal notranslate"><span class="pre">当前这个球</span></code> 和 <code class="docutils literal notranslate"><span class="pre">本该在这个篮子的球</span></code> 偷偷换了位置，让当前这个球滚回与其编号一致的篮子，并把在它篮子里的球换回来；
 如果换回来的球与篮子编号还不一致，同理，继续更换；如果在更换过程中，让当前球滚去其该再的位置时，发现已经有相同的球在那了，我们就找到了 <code class="docutils literal notranslate"><span class="pre">重复的数字</span></code> 。</p>
-<p><code class="docutils literal notranslate"><span class="pre">此法改变了原数组</span></code></p>
-</div></blockquote>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">此法改变了原数组</span></code></p>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
@@ -155,6 +157,7 @@
 <li class="toctree-l2"><a class="reference internal" href="10.html">面试题10- I. 斐波那契数列</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html">合集</a></li>
 </ul>
 
 <div class="relations">
