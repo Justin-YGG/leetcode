@@ -83,4 +83,4 @@ https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/
 
 .. seealso::
 
-    :ref:`implement-queue-using-stacks`.
+    :ref:`implement-stack-using-queues`.
