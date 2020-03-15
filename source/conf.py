@@ -108,6 +108,9 @@ html_theme_options = {
     'github_banner': False,
     'show_related': False,
     'note_bg': '#FFF59C',
+    'tip_bg': '#ccccff',
+    'important_bg': '#F08080',
+    'seealso_bg': '#ccff99',
 }
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

@@ -34,13 +34,17 @@ https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
 
 ``根据题目描述输入的前序遍历和中序遍历的结果中都不含重复的数字，其表明树中每个节点值都是唯一的``
 
-根据以上特点，可以按顺序完成以下工作：
+.. tip::
 
-    - 前序遍历的首个元素即为根节点 root 的值；
-    - 在中序遍历中搜索根节点 root 的索引 ，可将中序遍历划分为 [ 左子树 | 根节点 | 右子树 ]
-    - 根据中序遍历中的左（右）子树的节点数量，可将前序遍历划分为 [ 根节点 | 左子树 | 右子树 ]
+    根据以上特点，可以按顺序完成以下工作：
 
-自此可确定 三个节点的关系 ：1.树的根节点、2.左子树根节点、3.右子树根节点（即前序遍历中左（右）子树的首个元素）。
+        - 前序遍历的首个元素即为根节点 root 的值；
+        - 在中序遍历中搜索根节点 root 的索引 ，可将中序遍历划分为 [ 左子树 | 根节点 | 右子树 ]
+        - 根据中序遍历中的左（右）子树的节点数量，可将前序遍历划分为 [ 根节点 | 左子树 | 右子树 ]
+
+    自此可确定 三个节点的关系 ：1.树的根节点、2.左子树根节点、3.右子树根节点（即前序遍历中左（右）子树的首个元素）。
+
+``找root节点，根据前序遍历；计算子树区间根据中序遍历``
 
 .. note::
 
@@ -75,24 +79,24 @@ https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
             return self.recur(0, 0, len(inorder) - 1)
 
         def recur(self, pre_root, in_left, in_right):
-            #: terminator
+            # terminator
             if in_left > in_right:
                 return
-            #: 根节点
+            # 根节点
             root = TreeNode(self.preorder[pre_root])
 
-            #: 计算根节点在中序中的位置 i
-            i = self.inorder_dict[self.preorder[pre_root]]
+            # 计算根节点在中序中的位置 i
+            pivot = self.inorder_dict[self.preorder[pre_root]]
 
-            #: drill down
+            # drill down
 
-            #: 根据前序[根节点 | 左子树 | 右子树]，pre_root + 1 为左子树root节点位置
-            #: 根据中序[左子树 | 根节点 | 右子树]，左子树右边界为 i - 1 位置
-            root.left = self.recur(pre_root + 1, in_left, i - 1)
+            # 根据前序[根节点 | 左子树 | 右子树]，pre_root + 1 为左子树root节点位置
+            # 根据中序[左子树 | 根节点 | 右子树]，左子树右边界为 pivot - 1 位置
+            root.left = self.recur(pre_root + 1, in_left, pivot - 1)
 
-            #: 根据前序[根节点 | 左子树 | 右子树]，pre_root + 跨过左子树的长度 +1 为右子树root节点位置
-            #: 根据中序[左子树 | 根节点 | 右子树]，右子树左边界为 i + 1 位置，左子树的长度为 i - in_left
-            root.right = self.recur(pre_root + i - in_left + 1, i + 1, in_right)
+            # 根据前序[根节点 | 左子树 | 右子树]，pre_root + 跨过左子树的长度 +1 为右子树root节点位置
+            # 根据中序[左子树 | 根节点 | 右子树]，右子树左边界为 pivot + 1 位置，左子树的长度为 pivot - in_left
+            root.right = self.recur(pre_root + pivot - in_left + 1, pivot + 1, in_right)
 
-            #: process current level
+            # process current level
             return root

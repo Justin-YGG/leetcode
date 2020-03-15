@@ -290,7 +290,7 @@ div.attention {
 }
 
 div.important {
-    background-color: #EEE;
+    background-color: #F08080;
     border: 1px solid #CCC;
 }
 
@@ -300,7 +300,7 @@ div.note {
 }
 
 div.tip {
-    background-color: #EEE;
+    background-color: #ccccff;
     border: 1px solid #CCC;
 }
 
@@ -310,7 +310,7 @@ div.hint {
 }
 
 div.seealso {
-    background-color: #EEE;
+    background-color: #ccff99;
     border: 1px solid #CCC;
 }
 

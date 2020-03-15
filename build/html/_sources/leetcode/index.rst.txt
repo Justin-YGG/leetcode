@@ -32,6 +32,8 @@ LeetCode
     rotate-array
     reverse-linked-list
     implement-trie-prefix-tree
+    implement-stack-using-queues
+    implement-queue-using-stacks
     move-zeroes
     coin-change
     n-ary-tree-level-order-traversal

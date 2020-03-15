@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="面试题09. 用两个栈实现队列" href="09.html" />
     <link rel="prev" title="面试题06. 从尾到头打印链表" href="06.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -58,6 +59,8 @@
 <hr class="docutils" />
 <p>题解：<a class="reference external" href="https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/solution/mian-shi-ti-07-zhong-jian-er-cha-shu-di-gui-fa-qin/">https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/solution/mian-shi-ti-07-zhong-jian-er-cha-shu-di-gui-fa-qin/</a></p>
 <p><code class="docutils literal notranslate"><span class="pre">根据题目描述输入的前序遍历和中序遍历的结果中都不含重复的数字，其表明树中每个节点值都是唯一的</span></code></p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
 <p>根据以上特点，可以按顺序完成以下工作：</p>
 <blockquote>
 <div><ul class="simple">
@@ -66,7 +69,9 @@
 <li>根据中序遍历中的左（右）子树的节点数量，可将前序遍历划分为 [ 根节点 | 左子树 | 右子树 ]</li>
 </ul>
 </div></blockquote>
-<p>自此可确定 三个节点的关系 ：1.树的根节点、2.左子树根节点、3.右子树根节点（即前序遍历中左（右）子树的首个元素）。</p>
+<p class="last">自此可确定 三个节点的关系 ：1.树的根节点、2.左子树根节点、3.右子树根节点（即前序遍历中左（右）子树的首个元素）。</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">找root节点，根据前序遍历；计算子树区间根据中序遍历</span></code></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
@@ -101,26 +106,26 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">inorder</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pre_root</span><span class="p">,</span> <span class="n">in_left</span><span class="p">,</span> <span class="n">in_right</span><span class="p">):</span>
-        <span class="c1">#: terminator</span>
+        <span class="c1"># terminator</span>
         <span class="k">if</span> <span class="n">in_left</span> <span class="o">&gt;</span> <span class="n">in_right</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="c1">#: 根节点</span>
+        <span class="c1"># 根节点</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preorder</span><span class="p">[</span><span class="n">pre_root</span><span class="p">])</span>
 
-        <span class="c1">#: 计算根节点在中序中的位置 i</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inorder_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">preorder</span><span class="p">[</span><span class="n">pre_root</span><span class="p">]]</span>
+        <span class="c1"># 计算根节点在中序中的位置 i</span>
+        <span class="n">pivot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inorder_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">preorder</span><span class="p">[</span><span class="n">pre_root</span><span class="p">]]</span>
 
-        <span class="c1">#: drill down</span>
+        <span class="c1"># drill down</span>
 
-        <span class="c1">#: 根据前序[根节点 | 左子树 | 右子树]，pre_root + 1 为左子树root节点位置</span>
-        <span class="c1">#: 根据中序[左子树 | 根节点 | 右子树]，左子树右边界为 i - 1 位置</span>
-        <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">pre_root</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">in_left</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 根据前序[根节点 | 左子树 | 右子树]，pre_root + 1 为左子树root节点位置</span>
+        <span class="c1"># 根据中序[左子树 | 根节点 | 右子树]，左子树右边界为 pivot - 1 位置</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">pre_root</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">in_left</span><span class="p">,</span> <span class="n">pivot</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="c1">#: 根据前序[根节点 | 左子树 | 右子树]，pre_root + 跨过左子树的长度 +1 为右子树root节点位置</span>
-        <span class="c1">#: 根据中序[左子树 | 根节点 | 右子树]，右子树左边界为 i + 1 位置，左子树的长度为 i - in_left</span>
-        <span class="n">root</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">pre_root</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="n">in_left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">in_right</span><span class="p">)</span>
+        <span class="c1"># 根据前序[根节点 | 左子树 | 右子树]，pre_root + 跨过左子树的长度 +1 为右子树root节点位置</span>
+        <span class="c1"># 根据中序[左子树 | 根节点 | 右子树]，右子树左边界为 pivot + 1 位置，左子树的长度为 pivot - in_left</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">pre_root</span> <span class="o">+</span> <span class="n">pivot</span> <span class="o">-</span> <span class="n">in_left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pivot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">in_right</span><span class="p">)</span>
 
-        <span class="c1">#: process current level</span>
+        <span class="c1"># process current level</span>
         <span class="k">return</span> <span class="n">root</span>
 </pre></div>
 </div>
@@ -162,6 +167,8 @@
 <li class="toctree-l2"><a class="reference internal" href="05.html">面试题05. 替换空格</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06.html">面试题06. 从尾到头打印链表</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">面试题07. 重建二叉树</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09.html">面试题09. 用两个栈实现队列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10.html">面试题10- I. 斐波那契数列</a></li>
 </ul>
 </li>
 </ul>
@@ -172,6 +179,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">剑指 Offer</a><ul>
       <li>Previous: <a href="06.html" title="previous chapter">面试题06. 从尾到头打印链表</a></li>
+      <li>Next: <a href="09.html" title="next chapter">面试题09. 用两个栈实现队列</a></li>
   </ul></li>
   </ul></li>
 </ul>
