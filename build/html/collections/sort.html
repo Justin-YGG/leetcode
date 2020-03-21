@@ -72,13 +72,13 @@
     <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">array</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>  <span class="c1"># 从第二个元素开始比较</span>
         <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># 已经经过 i 次冒泡，array[length-i]及之后的数据都是升上去的，已经有序</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># 注意冒泡之后，不要忘了修改状态</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">flag</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">array</span>
 </pre></div>
@@ -255,10 +255,65 @@
 
     <span class="n">mid</span> <span class="o">=</span> <span class="n">length</span> <span class="o">//</span> <span class="mi">2</span>
     <span class="n">left</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">mid</span><span class="p">])</span>
-    <span class="n">right</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">mid</span><span class="p">:])</span>
     <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="id4">
+<h3><strong>快速排序（Merge Sort）</strong><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>如果数量级比较小，快速排序会比归并排序快</li>
+<li>快速排序也是基于分治思想，与归并排序不同，归并排序总是将数组一分为二，然后分别排序；
+但快速排序的 <code class="docutils literal notranslate"><span class="pre">分区点</span></code> 不一定是中点，由 partition 函数计算得到 pivot 位置</li>
+</ul>
+<img alt="../_images/partition.jpg" src="../_images/partition.jpg" />
+<p>快速排序的核心就是 <code class="docutils literal notranslate"><span class="pre">partition</span> <span class="pre">函数</span></code>，其原理是：</p>
+<blockquote>
+<div><p>我们从数组 <code class="docutils literal notranslate"><span class="pre">[p,</span> <span class="pre">...</span> <span class="pre">,r]</span></code> 中选取任意一个元素，通常选择最后一个元素作为 pivot（分区点），
+然后将 <code class="docutils literal notranslate"><span class="pre">小于</span> <span class="pre">pivot</span> <span class="pre">的元素都移到</span> <span class="pre">pivot</span> <span class="pre">左边</span></code>，将 <code class="docutils literal notranslate"><span class="pre">大于</span> <span class="pre">pivot</span> <span class="pre">的元素都移到</span> <span class="pre">pivot</span> <span class="pre">右边</span></code>，
+这样，pivot 本身是有序了，他已经找到了自己该在的位置，假设 pivot 目前的下标是 q，那么此时数组就被分为了
+三部分 <code class="docutils literal notranslate"><span class="pre">[p,</span> <span class="pre">...,</span> <span class="pre">q-1,</span> <span class="pre">q,</span> <span class="pre">q+1,</span> <span class="pre">...,</span> <span class="pre">r]</span></code>。</p>
+<p>实现方法是使用指针 i、j，快指针 j 负责遍历元素，找到小于 pivot 的元素，与慢指针 <code class="docutils literal notranslate"><span class="pre">i+1</span></code> 位置的元素进行交换，
+为什么要与 <code class="docutils literal notranslate"><span class="pre">i+1</span></code> 位置的元素交换，而不是直接将 i 与 j 位置的元素互相交换？因为此时 i、j 位置的元素都小于 pivot，
+直接交互两者，会导致将小于 pivot 的 i 位置元素又扔到了后面位置，所以使用大于 pivot 的 <code class="docutils literal notranslate"><span class="pre">i+1</span></code> 位置元素进行交换，
+可以观察到的是，完成一次交换后，<code class="docutils literal notranslate"><span class="pre">&lt;=i</span></code> 位置的元素都是小于 pivot 的，<code class="docutils literal notranslate"><span class="pre">[i+1,</span> <span class="pre">j]</span></code> 区间的元素都是大于 pivot 的。</p>
+<p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">p</span> <span class="pre">-</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">j</span> <span class="pre">=</span> <span class="pre">p</span></code>, 遍历至 <code class="docutils literal notranslate"><span class="pre">r-1</span></code>，遍历完成后返回 <code class="docutils literal notranslate"><span class="pre">i+1</span></code> 就是最后一个元素该在的位置。</p>
+</div></blockquote>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+    <span class="n">i</span><span class="o">=</span> <span class="n">low</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">high</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">high</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">high</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>有了 <code class="docutils literal notranslate"><span class="pre">partition</span></code> 函数我们就可以计算 pivot 下标，通过递归来排序</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>空间复杂度：O(n)</li>
+<li>时间复杂度：O(nlogn)，最好情况下，每次分区都分出 1 个和剩余元素，就会退化为 O(n^2)</li>
+</ul>
+</div>
+<img alt="../_images/quick_sort.jpeg" src="../_images/quick_sort.jpeg" />
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">low</span> <span class="o">&gt;=</span> <span class="n">high</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+    <span class="n">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">pivot</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">pivot</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quick_sort</span><span class="p">(</span><span class="n">arrary</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </div>

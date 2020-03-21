@@ -44,13 +44,13 @@
         length = len(array)
         if length <= 1:
             return array
-        for i in range(1, length):
+        for i in range(1, length):  # 从第二个元素开始比较
             flag = False
             # 已经经过 i 次冒泡，array[length-i]及之后的数据都是升上去的，已经有序
             for j in range(length-i):
                 if array[j] > array[j+1]:
                     array[j], array[j+1] = array[j+1], array[j]
-                    flag = True
+                    flag = True  # 注意冒泡之后，不要忘了修改状态
             if not flag:
                 return array
 
@@ -236,5 +236,67 @@
 
         mid = length // 2
         left = merge_sort(array[0:mid])
-        right = merge_sort(array[mid+1:])
+        right = merge_sort(array[mid:])
         return merge(left, right)
+
+-------------------------------------------------------------
+
+**快速排序（Merge Sort）**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- 如果数量级比较小，快速排序会比归并排序快
+
+- 快速排序也是基于分治思想，与归并排序不同，归并排序总是将数组一分为二，然后分别排序；
+  但快速排序的 ``分区点`` 不一定是中点，由 partition 函数计算得到 pivot 位置
+
+.. image:: ../_static/images/partition.jpg
+
+快速排序的核心就是 ``partition 函数``，其原理是：
+
+    我们从数组 ``[p, ... ,r]`` 中选取任意一个元素，通常选择最后一个元素作为 pivot（分区点），
+    然后将 ``小于 pivot 的元素都移到 pivot 左边``，将 ``大于 pivot 的元素都移到 pivot 右边``，
+    这样，pivot 本身是有序了，他已经找到了自己该在的位置，假设 pivot 目前的下标是 q，那么此时数组就被分为了
+    三部分 ``[p, ..., q-1, q, q+1, ..., r]``。
+
+    实现方法是使用指针 i、j，快指针 j 负责遍历元素，找到小于 pivot 的元素，与慢指针 ``i+1`` 位置的元素进行交换，
+    为什么要与 ``i+1`` 位置的元素交换，而不是直接将 i 与 j 位置的元素互相交换？因为此时 i、j 位置的元素都小于 pivot，
+    直接交互两者，会导致将小于 pivot 的 i 位置元素又扔到了后面位置，所以使用大于 pivot 的 ``i+1`` 位置元素进行交换，
+    可以观察到的是，完成一次交换后，``<=i`` 位置的元素都是小于 pivot 的，``[i+1, j]`` 区间的元素都是大于 pivot 的。
+
+    ``i = p - 1``, ``j = p``, 遍历至 ``r-1``，遍历完成后返回 ``i+1`` 就是最后一个元素该在的位置。
+
+.. code:: python
+
+    def partition(array, low, high):
+        i= low - 1
+        pivot = array[high]
+        for j in range(low, high):
+            if array[j] <= pivot:
+                i += 1
+                array[i], array[j] = array[j], array[i]
+        array[i+1], array[high] = array[high], array[i+1]
+        return i + 1
+
+
+有了 ``partition`` 函数我们就可以计算 pivot 下标，通过递归来排序
+
+.. note::
+
+    - 空间复杂度：O(n)
+
+    - 时间复杂度：O(nlogn)，最好情况下，每次分区都分出 1 个和剩余元素，就会退化为 O(n^2)
+
+.. image:: ../_static/images/quick_sort.jpeg
+
+.. code:: python
+
+    def quick_sort(array, low, high):
+
+        if low >= high:
+            return
+
+        pivot = partition(array, low, high)
+        quick_sort(array, low, pivot-1)
+        quick_sort(array, pivot+1, high)
+
+>>> quick_sort(arrary, 0, n-1)
