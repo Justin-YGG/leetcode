@@ -7,3 +7,4 @@
     :titlesonly:
 
     sort
+    binary-search

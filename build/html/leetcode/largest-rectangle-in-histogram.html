@@ -49,9 +49,12 @@
 </pre></div>
 </div>
 <hr class="docutils" />
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
 <p>矩形面积要最大的话，需要尽可能的使得连续的矩形多，并且最低一块的高度要高。</p>
-<p>我们需要按从高板子到低板子的顺序处理，先处理最高的板子，宽度为1，然后再处理旁边矮一些的板子，此时长度为2，因为之前的高板子可组成矮板子的矩形 ，因此我们需要一个递增栈，当遇到大的数字直接进栈，而当遇到小于栈顶元素的数字时，就要取出栈顶元素进行处理了，那取出的顺序就是从高板子到矮板子了，于是乎遇到的较小的数字只是一个触发，表示现在需要开始计算矩形面积了</p>
-<p><strong>找两边第一个小于它的值</strong> ，对不首位元素，我们通过添加 0 来创造其缺失的 <strong>两边元素</strong> 。【遇到的较小的数字只是一个触发】这个触发的数字其实就是栈顶元素的 <code class="docutils literal notranslate"><span class="pre">右边界</span></code> 即右边第一个小于栈顶元素的值，然后通过不算取出队列中的元素，直到遇到 <code class="docutils literal notranslate"><span class="pre">左边界</span></code> 即左边第一个小于栈顶元素的值</p>
+<p>我们需要按从高板子到低板子的顺序处理，先处理最高的板子，宽度为1，然后再处理旁边矮一些的板子，此时长度为2，因为 <code class="docutils literal notranslate"><span class="pre">之前的高板子可以与矮板子的矩形</span></code> ，因此我们需要一个递增栈，当遇到大的数字直接进栈，而当遇到小于栈顶元素的数字时，就要取出栈顶元素进行处理了，那取出的顺序就是从高板子到矮板子了，于是乎遇到的较小的数字只是一个触发，表示现在需要开始计算矩形面积了</p>
+<p class="last"><strong>找两边第一个小于它的值</strong> ，对于首位元素，我们通过添加 0 来创造其缺失的 <strong>两边元素</strong> 。【遇到的较小的数字只是一个触发】这个触发的数字其实就是栈顶元素的 <code class="docutils literal notranslate"><span class="pre">右边界</span></code> 即右边第一个小于栈顶元素的值，然后通过不算取出队列中的元素，直到遇到 <code class="docutils literal notranslate"><span class="pre">左边界</span></code> 即左边第一个小于栈顶元素的值</p>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <ul class="last simple">

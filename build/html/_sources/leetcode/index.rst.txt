@@ -15,6 +15,7 @@ LeetCode
     merge-two-sorted-lists
     swap-nodes-in-pairs
     remove-duplicates-from-sorted-array
+    search-in-rotated-sorted-array
     trapping-rain-water
     plus-one
     climbing-stairs
