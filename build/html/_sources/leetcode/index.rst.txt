@@ -15,20 +15,24 @@ LeetCode
     3Sum
     valid-parentheses
     merge-two-sorted-lists
+    generate-parentheses
     swap-nodes-in-pairs
     remove-duplicates-from-sorted-array
     search-in-rotated-sorted-array
     trapping-rain-water
+    permutations
     plus-one
     climbing-stairs
     edit-distance
     largest-rectangle-in-histogram
     merge-sorted-array
+    validate-binary-search-tree
     binary-tree-level-order-traversal
     binary-tree-zigzag-level-order-traversal
     maximum-depth-of-binary-tree
     construct-binary-tree-from-preorder-and-inorder-traversal
     convert-sorted-array-to-binary-search-tree
+    minimum-depth-of-binary-tree
     binary-tree-maximum-path-sum
     linked-list-cycle
     linked-list-cycle-ii
@@ -40,6 +44,7 @@ LeetCode
     implement-trie-prefix-tree
     kth-largest-element-in-an-array
     implement-stack-using-queues
+    invert-binary-tree
     implement-queue-using-stacks
     lowest-common-ancestor-of-a-binary-search-tree
     lowest-common-ancestor-of-a-binary-tree
