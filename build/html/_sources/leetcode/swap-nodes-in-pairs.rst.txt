@@ -50,10 +50,12 @@ https://leetcode-cn.com/problems/swap-nodes-in-pairs/
             :type head: ListNode
             :rtype: ListNode
             """
-            pre, pre.next = self, head
-            while pre.next and pre.next.next:
-                a = pre.next
+            pre = ListNode(0)
+            pre.next = head
+            c = pre
+            while c.next and c.next.next:
+                a = c.next
                 b= a.next
-                pre.next, b.next, a.next = b, a, b.next
-                pre = a
-            return self.next
+                c.next, b.next, a.next = b, a, b.next
+                c = a
+            return pre.next

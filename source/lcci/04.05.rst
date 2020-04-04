@@ -1,0 +1,35 @@
+======================
+合法二叉搜索树
+======================
+
+
+https://leetcode-cn.com/problems/legal-binary-search-tree-lcci/
+
+.. code:: python
+
+    # Definition for a binary tree node.
+    # class TreeNode(object):
+    #     def __init__(self, x):
+    #         self.val = x
+    #         self.left = None
+    #         self.right = None
+
+    class Solution(object):
+        def __init__(self):
+            self.nodes = []
+
+        def isValidBST(self, root):
+            """
+            :type root: TreeNode
+            :rtype: bool
+            """
+            self.inorder(root)
+            return self.nodes == sorted(set(self.nodes))
+
+
+        def inorder(self, node):
+            if not node:
+                return
+            self.inorder(node.left)
+            self.nodes.append(node.val)
+            self.inorder(node.right)

@@ -9,6 +9,8 @@ LeetCode
     template
     dp
     TwoSum
+    add-two-numbers
+    longest-palindromic-substring
     container-with-most-water
     3Sum
     valid-parentheses
@@ -23,20 +25,29 @@ LeetCode
     largest-rectangle-in-histogram
     merge-sorted-array
     binary-tree-level-order-traversal
+    binary-tree-zigzag-level-order-traversal
     maximum-depth-of-binary-tree
     construct-binary-tree-from-preorder-and-inorder-traversal
+    convert-sorted-array-to-binary-search-tree
     binary-tree-maximum-path-sum
     linked-list-cycle
+    linked-list-cycle-ii
     Reverse-Words-in-a-String
     min-stack
     majority-element
     rotate-array
     reverse-linked-list
     implement-trie-prefix-tree
+    kth-largest-element-in-an-array
     implement-stack-using-queues
     implement-queue-using-stacks
+    lowest-common-ancestor-of-a-binary-search-tree
+    lowest-common-ancestor-of-a-binary-tree
     move-zeroes
+    ongest-increasing-subsequence
     coin-change
+    third-maximum-number
     n-ary-tree-level-order-traversal
     fibonacci-number
     diameter-of-binary-tree
+    middle-of-the-linked-list
