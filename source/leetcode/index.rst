@@ -16,6 +16,7 @@ LeetCode
     valid-parentheses
     merge-two-sorted-lists
     generate-parentheses
+    reverse-nodes-in-k-group
     swap-nodes-in-pairs
     remove-duplicates-from-sorted-array
     search-in-rotated-sorted-array
@@ -36,6 +37,7 @@ LeetCode
     binary-tree-maximum-path-sum
     linked-list-cycle
     linked-list-cycle-ii
+    lru-cache
     Reverse-Words-in-a-String
     min-stack
     majority-element

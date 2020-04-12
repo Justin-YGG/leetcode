@@ -232,7 +232,7 @@
     def merge_sort(array):
         length = len(array)
         if length <= 1:
-            return
+            return array
 
         mid = length // 2
         left = merge_sort(array[0:mid])
@@ -284,7 +284,7 @@
 
     - 空间复杂度：O(n)
 
-    - 时间复杂度：O(nlogn)，最好情况下，每次分区都分出 1 个和剩余元素，就会退化为 O(n^2)
+    - 时间复杂度：O(nlogn)，最坏情况下，每次分区都分出 1 个和剩余元素，就会退化为 O(n^2)
 
 .. image:: ../_static/images/quick_sort.jpeg
 

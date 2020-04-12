@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="二分查找" href="binary-search.html" />
     <link rel="prev" title="合集" href="index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -251,7 +252,7 @@
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
     <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span>
+        <span class="k">return</span> <span class="n">array</span>
 
     <span class="n">mid</span> <span class="o">=</span> <span class="n">length</span> <span class="o">//</span> <span class="mi">2</span>
     <span class="n">left</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">mid</span><span class="p">])</span>
@@ -298,7 +299,7 @@
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
 <li>空间复杂度：O(n)</li>
-<li>时间复杂度：O(nlogn)，最好情况下，每次分区都分出 1 个和剩余元素，就会退化为 O(n^2)</li>
+<li>时间复杂度：O(nlogn)，最坏情况下，每次分区都分出 1 个和剩余元素，就会退化为 O(n^2)</li>
 </ul>
 </div>
 <img alt="../_images/quick_sort.jpeg" src="../_images/quick_sort.jpeg" />
@@ -356,8 +357,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#id2"><strong>基于比较的算法</strong></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="binary-search.html">二分查找</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../lcci/index.html">程序员面试金典</a></li>
 </ul>
 
 <div class="relations">
@@ -366,6 +369,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">合集</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">合集</a></li>
+      <li>Next: <a href="binary-search.html" title="next chapter">二分查找</a></li>
   </ul></li>
   </ul></li>
 </ul>
