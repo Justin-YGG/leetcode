@@ -45,8 +45,11 @@ LeetCode
     lru-cache
     Reverse-Words-in-a-String
     min-stack
+    two-sum-ii-input-array-is-sorted
+    intersection-of-two-linked-lists
     majority-element
     rotate-array
+    binary-tree-right-side-view
     reverse-linked-list
     implement-trie-prefix-tree
     kth-largest-element-in-an-array
