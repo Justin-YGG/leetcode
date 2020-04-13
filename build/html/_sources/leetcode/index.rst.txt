@@ -9,6 +9,7 @@ LeetCode
     template
     dp
     TwoSum
+    longest-substring-without-repeating-characters
     add-two-numbers
     longest-palindromic-substring
     container-with-most-water
@@ -20,11 +21,14 @@ LeetCode
     swap-nodes-in-pairs
     remove-duplicates-from-sorted-array
     search-in-rotated-sorted-array
+    first-missing-positive
     trapping-rain-water
     permutations
+    merge-intervals
     plus-one
     climbing-stairs
     edit-distance
+    remove-duplicates-from-sorted-list
     largest-rectangle-in-histogram
     merge-sorted-array
     validate-binary-search-tree
@@ -37,6 +41,7 @@ LeetCode
     binary-tree-maximum-path-sum
     linked-list-cycle
     linked-list-cycle-ii
+    reorder-list
     lru-cache
     Reverse-Words-in-a-String
     min-stack

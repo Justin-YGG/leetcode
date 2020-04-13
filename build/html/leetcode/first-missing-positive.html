@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>124. 二叉树中的最大路径和 &#8212; leetcode 1.0 documentation</title>
+    <title>41. 缺失的第一个正数 &#8212; leetcode 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="141. 环形链表" href="linked-list-cycle.html" />
-    <link rel="prev" title="111. 二叉树的最小深度" href="minimum-depth-of-binary-tree.html" />
+    <link rel="next" title="42. 接雨水" href="trapping-rain-water.html" />
+    <link rel="prev" title="33. 搜索旋转排序数组" href="search-in-rotated-sorted-array.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -35,58 +35,55 @@
           <div class="body" role="main">
             
   <div class="section" id="id1">
-<h1>124. 二叉树中的最大路径和<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/">https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/</a></p>
-<p>给定一个非空二叉树，返回其最大路径和。</p>
-<p>本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。</p>
+<h1>41. 缺失的第一个正数<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/first-missing-positive/">https://leetcode-cn.com/problems/first-missing-positive/</a></p>
+<p>给你一个未排序的整数数组，请你找出其中没有出现的最小的正整数。</p>
 <p>示例 1:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-
-       <span class="mi">1</span>
-      <span class="o">/</span> \
-     <span class="mi">2</span>   <span class="mi">3</span>
-
-<span class="n">输出</span><span class="p">:</span> <span class="mi">6</span>
-</pre></div>
-</div>
-<p>示例&nbsp;2:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
-
-   <span class="o">-</span><span class="mi">10</span>
-   <span class="o">/</span> \
-  <span class="mi">9</span>  <span class="mi">20</span>
-    <span class="o">/</span>  \
-   <span class="mi">15</span>   <span class="mi">7</span>
-
-<span class="n">输出</span><span class="p">:</span> <span class="mi">42</span>
-</pre></div>
-</div>
-<p>题解：<a class="reference external" href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-30/">https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-30/</a></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for a binary tree node.</span>
-<span class="c1"># class TreeNode(object):</span>
-<span class="c1">#     def __init__(self, x):</span>
-<span class="c1">#         self.val = x</span>
-<span class="c1">#         self.left = None</span>
-<span class="c1">#         self.right = None</span>
-
-<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">maxPathSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+<p>输入: [1,2,0]
+输出: 3
+示例 2:</p>
+<p>输入: [3,4,-1,1]
+输出: 2
+示例 3:</p>
+<p>输入: [7,8,9,11,12]
+输出: 1</p>
+<p>提示：</p>
+<p>你的算法的时间复杂度应为O(n)，并且只能使用常数级别的额外空间。</p>
+<p>使用额外空间解法：</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">firstMissingPositive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :type root: TreeNode</span>
+<span class="sd">        :type nums: List[int]</span>
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
-                <span class="k">return</span> <span class="mi">0</span>
-            <span class="n">left</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
-            <span class="n">right</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="n">length</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>不使用额外空间解法：</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">firstMissingPositive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type nums: List[int]</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+            <span class="k">while</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">length</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">sum_</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sum_</span><span class="p">,</span> <span class="n">left</span><span class="o">+</span><span class="n">right</span><span class="o">+</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
-            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">sum_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span>
-        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum_</span>
+        <span class="k">return</span> <span class="n">length</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">index_i</span><span class="p">,</span> <span class="n">index_j</span><span class="p">):</span>
+        <span class="n">nums</span><span class="p">[</span><span class="n">index_i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">index_j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">index_j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">index_i</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -136,7 +133,7 @@
 <li class="toctree-l2"><a class="reference internal" href="swap-nodes-in-pairs.html">24. 两两交换链表中的节点</a></li>
 <li class="toctree-l2"><a class="reference internal" href="remove-duplicates-from-sorted-array.html">26. 删除排序数组中的重复项</a></li>
 <li class="toctree-l2"><a class="reference internal" href="search-in-rotated-sorted-array.html">33. 搜索旋转排序数组</a></li>
-<li class="toctree-l2"><a class="reference internal" href="first-missing-positive.html">41. 缺失的第一个正数</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">41. 缺失的第一个正数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="trapping-rain-water.html">42. 接雨水</a></li>
 <li class="toctree-l2"><a class="reference internal" href="permutations.html">46. 全排列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="merge-intervals.html">56. 合并区间</a></li>
@@ -152,7 +149,7 @@
 <li class="toctree-l2"><a class="reference internal" href="construct-binary-tree-from-preorder-and-inorder-traversal.html">105. 从前序与中序遍历序列构造二叉树</a></li>
 <li class="toctree-l2"><a class="reference internal" href="convert-sorted-array-to-binary-search-tree.html">108. 将有序数组转换为二叉搜索树</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimum-depth-of-binary-tree.html">111. 二叉树的最小深度</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">124. 二叉树中的最大路径和</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary-tree-maximum-path-sum.html">124. 二叉树中的最大路径和</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linked-list-cycle.html">141. 环形链表</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linked-list-cycle-ii.html">142. 环形链表 II</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reorder-list.html">143. 重排链表</a></li>
@@ -189,8 +186,8 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">LeetCode</a><ul>
-      <li>Previous: <a href="minimum-depth-of-binary-tree.html" title="previous chapter">111. 二叉树的最小深度</a></li>
-      <li>Next: <a href="linked-list-cycle.html" title="next chapter">141. 环形链表</a></li>
+      <li>Previous: <a href="search-in-rotated-sorted-array.html" title="previous chapter">33. 搜索旋转排序数组</a></li>
+      <li>Next: <a href="trapping-rain-water.html" title="next chapter">42. 接雨水</a></li>
   </ul></li>
   </ul></li>
 </ul>

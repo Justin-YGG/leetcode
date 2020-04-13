@@ -33,5 +33,34 @@ https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/
     输出: 42
 
 
+题解：https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-30/
 
+
+.. code:: python
+
+    # Definition for a binary tree node.
+    # class TreeNode(object):
+    #     def __init__(self, x):
+    #         self.val = x
+    #         self.left = None
+    #         self.right = None
+
+    class Solution(object):
+        def maxPathSum(self, root):
+            """
+            :type root: TreeNode
+            :rtype: int
+            """
+            def dfs(node):
+                if not node:
+                    return 0
+                left = dfs(node.left)
+                right = dfs(node.right)
+
+                self.sum_ = max(self.sum_, left+right+node.val)
+                return max(node.val + max(left, right), 0)
+
+            self.sum_ = float('-inf')
+            dfs(root)
+            return self.sum_
 
