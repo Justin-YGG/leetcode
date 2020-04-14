@@ -28,6 +28,7 @@ LeetCode
     plus-one
     climbing-stairs
     edit-distance
+    minimum-window-substring
     remove-duplicates-from-sorted-list
     largest-rectangle-in-histogram
     merge-sorted-array
@@ -52,6 +53,7 @@ LeetCode
     binary-tree-right-side-view
     reverse-linked-list
     implement-trie-prefix-tree
+    minimum-size-subarray-sum
     kth-largest-element-in-an-array
     implement-stack-using-queues
     invert-binary-tree
@@ -63,6 +65,8 @@ LeetCode
     coin-change
     third-maximum-number
     n-ary-tree-level-order-traversal
+    add-two-numbers-ii
     fibonacci-number
     diameter-of-binary-tree
     middle-of-the-linked-list
+    check-completeness-of-a-binary-tree
