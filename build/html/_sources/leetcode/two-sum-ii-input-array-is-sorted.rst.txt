@@ -18,6 +18,9 @@ https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
     输出: [1,2]
     解释: 2 与 7 之
 
+.. code:: python
+
+    - 可以想成 三数之和 其中固定的那个数为 0
 
 
 .. code::python

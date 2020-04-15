@@ -33,7 +33,7 @@ https://leetcode-cn.com/problems/longest-common-prefix/
             """
             if not strs:
                 return ''
-            
+
             base = strs[0]
             for i in range(1, len(strs)):
                 j = k = 0

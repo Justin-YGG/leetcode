@@ -26,6 +26,7 @@ https://leetcode-cn.com/problems/minimum-size-subarray-sum/
             :type nums: List[int]
             :rtype: int
             """
+            # 注意判断边界
             if not nums:
                 return 0
             sum_ = left = right = 0
@@ -38,4 +39,5 @@ https://leetcode-cn.com/problems/minimum-size-subarray-sum/
                     sum_ -= nums[left]
                     left += 1
 
+            # 注意判断结果
             return 0 if res == float('inf') else res

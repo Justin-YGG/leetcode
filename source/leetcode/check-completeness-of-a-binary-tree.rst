@@ -19,6 +19,9 @@ https://leetcode-cn.com/problems/check-completeness-of-a-binary-tree/
     解释：最后一层前的每一层都是满的（即，结点值为 {1} 和 {2,3} 的两层），且最后一层中的所有结点（{4,5,6}）都尽可能地向左
 
 
+.. note::
+
+    - 如果有空节点，只可能在最后一层，且在左边
 
 
 .. code:: python
@@ -42,6 +45,7 @@ https://leetcode-cn.com/problems/check-completeness-of-a-binary-tree/
             stack = [root]
             flag = False
             while stack:
+                # 注意，要弹左边的
                 node = stack.pop(0)
                 if not node:
                     flag = True
@@ -51,4 +55,4 @@ https://leetcode-cn.com/problems/check-completeness-of-a-binary-tree/
                 stack.append(node.left)
                 stack.append(node.right)
 
-        return True
+            return True

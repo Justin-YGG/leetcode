@@ -46,6 +46,12 @@
 解释：最后一层前的每一层都是满的（即，结点值为 {1} 和 {2,3} 的两层），且最后一层中的所有结点（{4,5,6}）都尽可能地向左
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>如果有空节点，只可能在最后一层，且在左边</li>
+</ul>
+</div>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for a binary tree node.</span>
 <span class="c1"># class TreeNode(object):</span>
 <span class="c1">#     def __init__(self, x):</span>
@@ -65,6 +71,7 @@
         <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span>
         <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+            <span class="c1"># 注意，要弹左边的</span>
             <span class="n">node</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
                 <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
@@ -74,7 +81,7 @@
             <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
             <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
 </div>
@@ -117,6 +124,7 @@
 <li class="toctree-l2"><a class="reference internal" href="add-two-numbers.html">2. 两数相加</a></li>
 <li class="toctree-l2"><a class="reference internal" href="longest-palindromic-substring.html">5. 最长回文子串</a></li>
 <li class="toctree-l2"><a class="reference internal" href="container-with-most-water.html">11. 盛最多水的容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="longest-common-prefix.html">14. 最长公共前缀</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3Sum.html">15. 三数之和</a></li>
 <li class="toctree-l2"><a class="reference internal" href="valid-parentheses.html">20. 有效的括号</a></li>
 <li class="toctree-l2"><a class="reference internal" href="merge-two-sorted-lists.html">21. 合并两个有序链表</a></li>
@@ -164,6 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="implement-queue-using-stacks.html">232. 用栈实现队列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lowest-common-ancestor-of-a-binary-search-tree.html">235. 二叉搜索树的最近公共祖先</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lowest-common-ancestor-of-a-binary-tree.html">236. 二叉树的最近公共祖先</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding-window-maximum.html">239. 滑动窗口最大值</a></li>
 <li class="toctree-l2"><a class="reference internal" href="move-zeroes.html">283. 移动零</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ongest-increasing-subsequence.html">300. 最长上升子序列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coin-change.html">322. 零钱兑换</a></li>

@@ -54,6 +54,7 @@
 <span class="sd">        :type nums: List[int]</span>
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># 注意判断边界</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">nums</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
         <span class="n">sum_</span> <span class="o">=</span> <span class="n">left</span> <span class="o">=</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span>
@@ -66,6 +67,7 @@
                 <span class="n">sum_</span> <span class="o">-=</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span>
                 <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
 
+        <span class="c1"># 注意判断结果</span>
         <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">res</span>
 </pre></div>
 </div>
@@ -109,6 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="add-two-numbers.html">2. 两数相加</a></li>
 <li class="toctree-l2"><a class="reference internal" href="longest-palindromic-substring.html">5. 最长回文子串</a></li>
 <li class="toctree-l2"><a class="reference internal" href="container-with-most-water.html">11. 盛最多水的容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="longest-common-prefix.html">14. 最长公共前缀</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3Sum.html">15. 三数之和</a></li>
 <li class="toctree-l2"><a class="reference internal" href="valid-parentheses.html">20. 有效的括号</a></li>
 <li class="toctree-l2"><a class="reference internal" href="merge-two-sorted-lists.html">21. 合并两个有序链表</a></li>
@@ -156,6 +159,7 @@
 <li class="toctree-l2"><a class="reference internal" href="implement-queue-using-stacks.html">232. 用栈实现队列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lowest-common-ancestor-of-a-binary-search-tree.html">235. 二叉搜索树的最近公共祖先</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lowest-common-ancestor-of-a-binary-tree.html">236. 二叉树的最近公共祖先</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding-window-maximum.html">239. 滑动窗口最大值</a></li>
 <li class="toctree-l2"><a class="reference internal" href="move-zeroes.html">283. 移动零</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ongest-increasing-subsequence.html">300. 最长上升子序列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coin-change.html">322. 零钱兑换</a></li>
