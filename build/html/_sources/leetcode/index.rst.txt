@@ -13,6 +13,7 @@ LeetCode
     add-two-numbers
     longest-palindromic-substring
     container-with-most-water
+    longest-common-prefix
     3Sum
     valid-parentheses
     merge-two-sorted-lists
@@ -60,6 +61,7 @@ LeetCode
     implement-queue-using-stacks
     lowest-common-ancestor-of-a-binary-search-tree
     lowest-common-ancestor-of-a-binary-tree
+    sliding-window-maximum
     move-zeroes
     ongest-increasing-subsequence
     coin-change
