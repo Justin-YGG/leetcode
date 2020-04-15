@@ -38,7 +38,10 @@ https://leetcode-cn.com/problems/intersection-of-two-linked-lists/
             :rtype: ListNode
             """
             head_a, head_b = headA, headB
+
+            # 相交
             while head_a != head_b:
                 head_a = head_a.next if head_a else headB
                 head_b = head_b.next if head_b else headA
+
             return head_a

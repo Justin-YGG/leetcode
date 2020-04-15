@@ -57,9 +57,12 @@
 <span class="sd">        :rtype: ListNode</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">head_a</span><span class="p">,</span> <span class="n">head_b</span> <span class="o">=</span> <span class="n">headA</span><span class="p">,</span> <span class="n">headB</span>
+
+        <span class="c1"># 相交</span>
         <span class="k">while</span> <span class="n">head_a</span> <span class="o">!=</span> <span class="n">head_b</span><span class="p">:</span>
             <span class="n">head_a</span> <span class="o">=</span> <span class="n">head_a</span><span class="o">.</span><span class="n">next</span> <span class="k">if</span> <span class="n">head_a</span> <span class="k">else</span> <span class="n">headB</span>
             <span class="n">head_b</span> <span class="o">=</span> <span class="n">head_b</span><span class="o">.</span><span class="n">next</span> <span class="k">if</span> <span class="n">head_b</span> <span class="k">else</span> <span class="n">headA</span>
+
         <span class="k">return</span> <span class="n">head_a</span>
 </pre></div>
 </div>
@@ -103,10 +106,12 @@
 <li class="toctree-l2"><a class="reference internal" href="add-two-numbers.html">2. 两数相加</a></li>
 <li class="toctree-l2"><a class="reference internal" href="longest-palindromic-substring.html">5. 最长回文子串</a></li>
 <li class="toctree-l2"><a class="reference internal" href="container-with-most-water.html">11. 盛最多水的容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="longest-common-prefix.html">14. 最长公共前缀</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3Sum.html">15. 三数之和</a></li>
 <li class="toctree-l2"><a class="reference internal" href="valid-parentheses.html">20. 有效的括号</a></li>
 <li class="toctree-l2"><a class="reference internal" href="merge-two-sorted-lists.html">21. 合并两个有序链表</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate-parentheses.html">22. 括号生成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge-k-sorted-lists.html">23. 合并K个排序链表</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reverse-nodes-in-k-group.html">25. K 个一组翻转链表</a></li>
 <li class="toctree-l2"><a class="reference internal" href="swap-nodes-in-pairs.html">24. 两两交换链表中的节点</a></li>
 <li class="toctree-l2"><a class="reference internal" href="remove-duplicates-from-sorted-array.html">26. 删除排序数组中的重复项</a></li>
@@ -118,6 +123,7 @@
 <li class="toctree-l2"><a class="reference internal" href="plus-one.html">66. 加一</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climbing-stairs.html">70. 爬楼梯</a></li>
 <li class="toctree-l2"><a class="reference internal" href="edit-distance.html">72. 编辑距离</a></li>
+<li class="toctree-l2"><a class="reference internal" href="minimum-window-substring.html">76. 最小覆盖子串</a></li>
 <li class="toctree-l2"><a class="reference internal" href="remove-duplicates-from-sorted-list.html">83. 删除排序链表中的重复元素</a></li>
 <li class="toctree-l2"><a class="reference internal" href="largest-rectangle-in-histogram.html">84. 柱状图中最大的矩形</a></li>
 <li class="toctree-l2"><a class="reference internal" href="merge-sorted-array.html">88. 合并两个有序数组</a></li>
@@ -142,20 +148,26 @@
 <li class="toctree-l2"><a class="reference internal" href="binary-tree-right-side-view.html">199. 二叉树的右视图</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reverse-linked-list.html">206. 反转链表</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implement-trie-prefix-tree.html">208. 实现 Trie (前缀树)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="minimum-size-subarray-sum.html">209. 长度最小的子数组</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kth-largest-element-in-an-array.html">215. 数组中的第K个最大元素</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implement-stack-using-queues.html">225. 用队列实现栈</a></li>
 <li class="toctree-l2"><a class="reference internal" href="invert-binary-tree.html">226. 翻转二叉树</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implement-queue-using-stacks.html">232. 用栈实现队列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lowest-common-ancestor-of-a-binary-search-tree.html">235. 二叉搜索树的最近公共祖先</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lowest-common-ancestor-of-a-binary-tree.html">236. 二叉树的最近公共祖先</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding-window-maximum.html">239. 滑动窗口最大值</a></li>
 <li class="toctree-l2"><a class="reference internal" href="move-zeroes.html">283. 移动零</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ongest-increasing-subsequence.html">300. 最长上升子序列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coin-change.html">322. 零钱兑换</a></li>
 <li class="toctree-l2"><a class="reference internal" href="third-maximum-number.html">414. 第三大的数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="n-ary-tree-level-order-traversal.html">429. N叉树的层序遍历</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-two-numbers-ii.html">445. 两数相加 II</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fibonacci-number.html">509. 斐波那契数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="diameter-of-binary-tree.html">543. 二叉树的直径</a></li>
+<li class="toctree-l2"><a class="reference internal" href="degree-of-an-array.html">697. 数组的度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kth-largest-element-in-a-stream.html">703. 数据流中的第K大元素</a></li>
 <li class="toctree-l2"><a class="reference internal" href="middle-of-the-linked-list.html">876. 链表的中间结点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check-completeness-of-a-binary-tree.html">958. 二叉树的完全性检验</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../offer/index.html">剑指 Offer</a></li>

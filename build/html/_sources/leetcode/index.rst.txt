@@ -18,6 +18,7 @@ LeetCode
     valid-parentheses
     merge-two-sorted-lists
     generate-parentheses
+    merge-k-sorted-lists
     reverse-nodes-in-k-group
     swap-nodes-in-pairs
     remove-duplicates-from-sorted-array
@@ -70,5 +71,7 @@ LeetCode
     add-two-numbers-ii
     fibonacci-number
     diameter-of-binary-tree
+    degree-of-an-array
+    kth-largest-element-in-a-stream
     middle-of-the-linked-list
     check-completeness-of-a-binary-tree
