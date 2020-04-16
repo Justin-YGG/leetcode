@@ -62,6 +62,7 @@ k 是一个正整数，它的值小于或等于链表的长度。
                     return head
                 node_b = node_b.next
 
+            # 上面遍历完成后，node_b 是下一组的头结点，统一也是翻转部分连接的退出条件，等价于正常翻转数组的null
             new_head = self.reverse(node_a, node_b)
             node_a.next = self.reverseKGroup(node_b, k)
             return new_head

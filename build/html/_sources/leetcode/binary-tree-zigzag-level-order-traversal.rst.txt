@@ -48,3 +48,29 @@ https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
                 if tmp:
                     self.result.append(tmp)
             return self.result
+
+
+--------------------------------------------------------
+
+.. code:: python
+
+    class Solution:
+        def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+            res = []
+
+            def helper(root, depth):
+                if not root:
+                    return
+
+                if len(res) == depth:
+                    res.append([])
+                if depth % 2 == 0:
+                    res[depth].append(root.val)
+                else:
+                    res[depth].insert(0, root.val)
+
+                helper(root.left, depth + 1)
+                helper(root.right, depth + 1)
+
+            helper(root, 0)
+            return res
