@@ -31,6 +31,7 @@ LeetCode
     climbing-stairs
     edit-distance
     minimum-window-substring
+    search-in-rotated-sorted-array-ii
     remove-duplicates-from-sorted-list-ii
     remove-duplicates-from-sorted-list
     largest-rectangle-in-histogram
@@ -43,6 +44,7 @@ LeetCode
     convert-sorted-array-to-binary-search-tree
     minimum-depth-of-binary-tree
     binary-tree-maximum-path-sum
+    single-number
     linked-list-cycle
     linked-list-cycle-ii
     reorder-list
