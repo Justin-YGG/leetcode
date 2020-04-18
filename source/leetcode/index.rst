@@ -55,10 +55,12 @@ LeetCode
     intersection-of-two-linked-lists
     majority-element
     rotate-array
+    house-robber
     binary-tree-right-side-view
     reverse-linked-list
     implement-trie-prefix-tree
     minimum-size-subarray-sum
+    house-robber-ii
     kth-largest-element-in-an-array
     implement-stack-using-queues
     invert-binary-tree
@@ -69,6 +71,7 @@ LeetCode
     move-zeroes
     ongest-increasing-subsequence
     coin-change
+    house-robber-iii
     third-maximum-number
     n-ary-tree-level-order-traversal
     add-two-numbers-ii
