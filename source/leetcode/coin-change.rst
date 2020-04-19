@@ -78,3 +78,34 @@ https://leetcode-cn.com/problems/coin-change/
             for i in range(min(coins), amount+1):
                 dp[i] = min([dp[i-c] for c in coins if i - c >= 0]) + 1
             return dp[amount] if dp[amount] <= amount else -1
+
+-----------------------------------------------
+
+.. code:: python
+
+    class Solution(object):
+        def coinChange(self, coins, amount):
+            """
+            :type coins: List[int]
+            :type amount: int
+            :rtype: int
+            """
+            memo = dict()
+            def dp(n):
+                if n == 0:
+                    return 0
+                if n < 0:
+                    return -1
+
+                if n in memo:
+                    return memo[n]
+
+                res = float('inf')
+                for c in coins:
+                    sub = dp(n-c)
+                    if sub == -1:
+                        continue
+                    res = min(res, sub+1)
+                memo[n] = res if res != float('inf') else -1
+                return memo[n]
+            return dp(amount)
