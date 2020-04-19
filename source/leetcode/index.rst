@@ -42,6 +42,7 @@ LeetCode
     maximum-depth-of-binary-tree
     construct-binary-tree-from-preorder-and-inorder-traversal
     convert-sorted-array-to-binary-search-tree
+    balanced-binary-tree
     minimum-depth-of-binary-tree
     binary-tree-maximum-path-sum
     single-number
