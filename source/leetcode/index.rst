@@ -27,6 +27,7 @@ LeetCode
     trapping-rain-water
     permutations
     merge-intervals
+    minimum-path-sum
     plus-one
     climbing-stairs
     edit-distance
