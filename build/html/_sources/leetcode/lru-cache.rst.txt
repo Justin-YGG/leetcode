@@ -31,19 +31,20 @@ https://leetcode-cn.com/problems/lru-cache/
 
 .. code:: python
 
-    class Node(object):
+    class ListNode(object):
+
         def __init__(self, key, value):
             self.key = key
-            self.value = value
-            self.next = None
+            self.val = value
             self.pre = None
+            self.next = None
 
 
-    class DoubleList(object):
+    class LinkedList(object):
 
         def __init__(self):
-            self.head = Node(0, 0)
-            self.tail = Node(0, 0)
+            self.head = ListNode(0, 0)
+            self.tail = ListNode(0, 0)
             self.head.next = self.tail
             self.head.pre = self.tail
             self.tail.pre = self.head
@@ -67,94 +68,56 @@ https://leetcode-cn.com/problems/lru-cache/
             self.size -= 1
 
         def get_last(self):
-            if self.tail == self.head:
+            if self.head == self.tail:
                 return
             return self.tail.pre
-
 
     class LRUCache(object):
 
         def __init__(self, capacity):
+            """
+            :type capacity: int
+            """
             self.capacity = capacity
-            self.cache = dict()
-            self.linked_list = DoubleList()
+            self.linkedlist = LinkedList()
+            self.cache = {}
 
         def get(self, key):
+            """
+            :type key: int
+            :rtype: int
+            """
             if key not in self.cache:
                 return -1
 
-            val = self.cache[key].value
-            self.put(key, val)
-            return val
-
-        def put(self, key, value):class Node(object):
-        def __init__(self, key, value):
-            self.key = key
-            self.value = value
-            self.next = None
-            self.pre = None
-
-
-    class DoubleList(object):
-
-        def __init__(self):
-            self.head = Node(0, 0)
-            self.tail = Node(0, 0)
-            self.head.next = self.tail
-            self.head.pre = self.tail
-            self.tail.pre = self.head
-            self.tail.next = self.head
-            self.size = 0
-
-        def add_first(self, node):
-            node.next = self.head.next
-            node.pre = self.head
-            self.head.next.pre = node
-            self.head.next = node
-
-            self.size += 1
-
-        def remove(self, node):
-            node.pre.next = node.next
-            node.next.pre = node.pre
-            node.next = None
-            node.pre = None
-
-            self.size -= 1
-
-        def get_last(self):
-            if self.tail == self.head:
-                return
-            return self.tail.pre
-
-
-    class LRUCache(object):
-
-        def __init__(self, capacity):
-            self.capacity = capacity
-            self.cache = dict()
-            self.linked_list = DoubleList()
-
-        def get(self, key):
-            if key not in self.cache:
-                return -1
-
-            val = self.cache[key].value
+            val = self.cache[key].val
             self.put(key, val)
             return val
 
         def put(self, key, value):
-            node = Node(key, value)
-
+            """
+            :type key: int
+            :type value: int
+            :rtype: None
+            """
+            node = ListNode(key, value)
             if key in self.cache:
-                self.linked_list.remove(self.cache[key])
-                self.linked_list.add_first(node)
+                self.linkedlist.remove(self.cache[key])
+                self.linkedlist.add_first(node)
                 self.cache[key] = node
             else:
-                if self.capacity == self.linked_list.size:
-                    last = self.linked_list.get_last()
+                if self.capacity == self.linkedlist.size:
+                    last = self.linkedlist.get_last()
                     if last:
-                        self.linked_list.remove(last)
+                        self.linkedlist.remove(last)
                         self.cache.pop(last.key)
-                self.linked_list.add_first(node)
-                self.cache[key] = node
+
+                self.linkedlist.add_first(node)
+                self.cache[key] =  node
+
+
+
+    # Your LRUCache object will be instantiated and called as such:
+    # obj = LRUCache(capacity)
+    # param_1 = obj.get(key)
+    # obj.put(key,value)

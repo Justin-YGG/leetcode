@@ -45,6 +45,8 @@ LeetCode
     convert-sorted-array-to-binary-search-tree
     balanced-binary-tree
     minimum-depth-of-binary-tree
+    best-time-to-buy-and-sell-stock
+    best-time-to-buy-and-sell-stock-ii
     binary-tree-maximum-path-sum
     single-number
     linked-list-cycle

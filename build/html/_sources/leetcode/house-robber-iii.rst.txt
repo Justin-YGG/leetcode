@@ -44,27 +44,28 @@ https://leetcode-cn.com/problems/house-robber-iii/
     #         self.right = None
 
     class Solution(object):
-        def __init__(self):
-            self.memo = {}
-
         def rob(self, root):
             """
             :type root: TreeNode
             :rtype: int
             """
-            if not root:
-                return 0
-            if root in self.memo:
-                return self.memo[root]
+            memo = {}
+            def dp(node):
+                if not node:
+                    return 0
 
-            do_it = root.val
-            if root.left:
-                do_it += self.rob(root.left.left) + self.rob(root.left.right)
-            if root.right:
-                do_it += self.rob(root.right.left) + self.rob(root.right.right)
+                if node in memo:
+                    return memo[node]
 
-            not_do_it = self.rob(root.left) + self.rob(root.right)
+                do_it = node.val
+                if node.left:
+                    do_it += dp(node.left.left) + dp(node.left.right)
+                if node.right:
+                    do_it += dp(node.right.left) + dp(node.right.right)
 
-            res = max(not_do_it, do_it)
-            self.memo[root] = res
-            return res
+                not_do_it = dp(node.left) + dp(node.right)
+                res =  max(do_it, not_do_it)
+                memo[node] = res
+                return memo[node]
+
+            return dp(root)

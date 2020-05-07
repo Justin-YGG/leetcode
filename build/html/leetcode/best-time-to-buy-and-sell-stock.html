@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>337. 打家劫舍 III &#8212; leetcode 1.0 documentation</title>
+    <title>121. 买卖股票的最佳时机 &#8212; leetcode 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="414. 第三大的数" href="third-maximum-number.html" />
-    <link rel="prev" title="322. 零钱兑换" href="coin-change.html" />
+    <link rel="next" title="122. 买卖股票的最佳时机 II" href="best-time-to-buy-and-sell-stock-ii.html" />
+    <link rel="prev" title="111. 二叉树的最小深度" href="minimum-depth-of-binary-tree.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -34,69 +34,39 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="iii">
-<h1>337. 打家劫舍 III<a class="headerlink" href="#iii" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://leetcode-cn.com/problems/house-robber-iii/">https://leetcode-cn.com/problems/house-robber-iii/</a></p>
-<p>在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。</p>
-<p>计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。</p>
+  <div class="section" id="id1">
+<h1>121. 买卖股票的最佳时机<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/</a></p>
+<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
+<p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
+<p>注意：你不能在买入股票前卖出股票。</p>
 <p>示例 1:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-
-     <span class="mi">3</span>
-    <span class="o">/</span> \
-   <span class="mi">2</span>   <span class="mi">3</span>
-    \   \
-     <span class="mi">3</span>   <span class="mi">1</span>
-
-<span class="n">输出</span><span class="p">:</span> <span class="mi">7</span>
-<span class="n">解释</span><span class="p">:</span> <span class="n">小偷一晚能够盗取的最高金额</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=</span> <span class="mf">7.</span>
-<span class="n">示例</span> <span class="mi">2</span><span class="p">:</span>
-
-<span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-
-     <span class="mi">3</span>
-    <span class="o">/</span> \
-   <span class="mi">4</span>   <span class="mi">5</span>
-  <span class="o">/</span> \   \
- <span class="mi">1</span>   <span class="mi">3</span>   <span class="mi">1</span>
-
-<span class="n">输出</span><span class="p">:</span> <span class="mi">9</span>
-<span class="n">解释</span><span class="p">:</span> <span class="n">小偷一晚能够盗取的最高金额</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">=</span> <span class="mf">9.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>输入: [7,1,5,3,6,4]
+输出: 5
+解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
 </pre></div>
 </div>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for a binary tree node.</span>
-<span class="c1"># class TreeNode(object):</span>
-<span class="c1">#     def __init__(self, x):</span>
-<span class="c1">#         self.val = x</span>
-<span class="c1">#         self.left = None</span>
-<span class="c1">#         self.right = None</span>
-
-<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">rob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+<p>示例 2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">输出</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">解释</span><span class="p">:</span> <span class="n">在这种情况下</span><span class="p">,</span> <span class="n">没有交易完成</span><span class="p">,</span> <span class="n">所以最大利润为</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">maxProfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prices</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :type root: TreeNode</span>
+<span class="sd">        :type prices: List[int]</span>
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">memo</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
-                <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">dp_i_0</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">dp_i_1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">memo</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+            <span class="n">dp_i_0</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp_i_0</span><span class="p">,</span> <span class="n">dp_i_1</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">dp_i_1</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp_i_1</span><span class="p">,</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
 
-            <span class="n">do_it</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">val</span>
-            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
-                <span class="n">do_it</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
-                <span class="n">do_it</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
-
-            <span class="n">not_do_it</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
-            <span class="n">res</span> <span class="o">=</span>  <span class="nb">max</span><span class="p">(</span><span class="n">do_it</span><span class="p">,</span> <span class="n">not_do_it</span><span class="p">)</span>
-            <span class="n">memo</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
-            <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
-
-        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dp_i_0</span>
 </pre></div>
 </div>
 </div>
@@ -171,7 +141,7 @@
 <li class="toctree-l2"><a class="reference internal" href="convert-sorted-array-to-binary-search-tree.html">108. 将有序数组转换为二叉搜索树</a></li>
 <li class="toctree-l2"><a class="reference internal" href="balanced-binary-tree.html">110. 平衡二叉树</a></li>
 <li class="toctree-l2"><a class="reference internal" href="minimum-depth-of-binary-tree.html">111. 二叉树的最小深度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="best-time-to-buy-and-sell-stock.html">121. 买卖股票的最佳时机</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">121. 买卖股票的最佳时机</a></li>
 <li class="toctree-l2"><a class="reference internal" href="best-time-to-buy-and-sell-stock-ii.html">122. 买卖股票的最佳时机 II</a></li>
 <li class="toctree-l2"><a class="reference internal" href="binary-tree-maximum-path-sum.html">124. 二叉树中的最大路径和</a></li>
 <li class="toctree-l2"><a class="reference internal" href="single-number.html">136. 只出现一次的数字</a></li>
@@ -201,7 +171,7 @@
 <li class="toctree-l2"><a class="reference internal" href="move-zeroes.html">283. 移动零</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ongest-increasing-subsequence.html">300. 最长上升子序列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coin-change.html">322. 零钱兑换</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">337. 打家劫舍 III</a></li>
+<li class="toctree-l2"><a class="reference internal" href="house-robber-iii.html">337. 打家劫舍 III</a></li>
 <li class="toctree-l2"><a class="reference internal" href="third-maximum-number.html">414. 第三大的数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="n-ary-tree-level-order-traversal.html">429. N叉树的层序遍历</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-two-numbers-ii.html">445. 两数相加 II</a></li>
@@ -223,8 +193,8 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">LeetCode</a><ul>
-      <li>Previous: <a href="coin-change.html" title="previous chapter">322. 零钱兑换</a></li>
-      <li>Next: <a href="third-maximum-number.html" title="next chapter">414. 第三大的数</a></li>
+      <li>Previous: <a href="minimum-depth-of-binary-tree.html" title="previous chapter">111. 二叉树的最小深度</a></li>
+      <li>Next: <a href="best-time-to-buy-and-sell-stock-ii.html" title="next chapter">122. 买卖股票的最佳时机 II</a></li>
   </ul></li>
   </ul></li>
 </ul>
