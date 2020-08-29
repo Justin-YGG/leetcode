@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = u'leetcode'
-copyright = u'2020, Justin'
+copyright = u'2020, Justin|Sunjian'
 author = u'Justin'
 
 # The short X.Y version

@@ -1,19 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>面试题06. 从尾到头打印链表 &#8212; leetcode 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="面试题07. 重建二叉树" href="07.html" />
@@ -50,25 +49,25 @@
 </div>
 <hr class="docutils" />
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<p class="admonition-title">Tip</p>
 <p>从尾到头打印节点，符合 <code class="docutils literal notranslate"><span class="pre">后进先出</span></code> 的特点:</p>
-<blockquote class="last">
+<blockquote>
 <div><ul class="simple">
-<li>借助 <code class="docutils literal notranslate"><span class="pre">栈</span></code> 结构来实现</li>
-<li>通过天然的栈结构 <code class="docutils literal notranslate"><span class="pre">递归</span></code> 来实现，链表过长时，可能会导致栈溢出</li>
+<li><p>借助 <code class="docutils literal notranslate"><span class="pre">栈</span></code> 结构来实现</p></li>
+<li><p>通过天然的栈结构 <code class="docutils literal notranslate"><span class="pre">递归</span></code> 来实现，链表过长时，可能会导致栈溢出</p></li>
 </ul>
 </div></blockquote>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<ul class="last simple">
-<li>时间复杂度：O(n)</li>
-<li>空间复杂度：O(n)，栈或者递归所需</li>
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>时间复杂度：O(n)</p></li>
+<li><p>空间复杂度：O(n)，栈或者递归所需</p></li>
 </ul>
 </div>
 <hr class="docutils" />
 <p><strong>方法一</strong>：递归</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for singly-linked list.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for singly-linked list.</span>
 <span class="c1"># class ListNode(object):</span>
 <span class="c1">#     def __init__(self, x):</span>
 <span class="c1">#         self.val = x</span>
@@ -96,7 +95,7 @@
 </div>
 <hr class="docutils" />
 <p><strong>方法二</strong>：非递归(栈)</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for singly-linked list.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for singly-linked list.</span>
 <span class="c1"># class ListNode(object):</span>
 <span class="c1">#     def __init__(self, x):</span>
 <span class="c1">#         self.val = x</span>
@@ -155,9 +154,11 @@
 <li class="toctree-l2"><a class="reference internal" href="07.html">面试题07. 重建二叉树</a></li>
 <li class="toctree-l2"><a class="reference internal" href="09.html">面试题09. 用两个栈实现队列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10.html">面试题10- I. 斐波那契数列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="50.html">面试题50. 第一个只出现一次的字符</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lcci/index.html">程序员面试金典</a></li>
 </ul>
 
 <div class="relations">
@@ -172,17 +173,15 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -196,7 +195,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Justin.
+      &copy;2020, Justin|Sunjian.
       
     </div>
 

@@ -1,22 +1,21 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>189. 旋转数组 &#8212; leetcode 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="206. 反转链表" href="reverse-linked-list.html" />
+    <link rel="next" title="198. 打家劫舍" href="house-robber.html" />
     <link rel="prev" title="169. 多数元素" href="majority-element.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -37,7 +36,7 @@
   <div class="section" id="id1">
 <h1>189. 旋转数组<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://leetcode-cn.com/problems/rotate-array/">https://leetcode-cn.com/problems/rotate-array/</a></p>
-<p>给定一个数组，将数组中的元素向右移动&nbsp;k&nbsp;个位置，其中&nbsp;k&nbsp;是非负数。</p>
+<p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</p>
 <p>示例 1:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span> <span class="n">和</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">输出</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
@@ -49,7 +48,7 @@
 <span class="n">向右旋转</span> <span class="mi">3</span> <span class="n">步</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>示例&nbsp;2:</p>
+<p>示例 2:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">99</span><span class="p">]</span> <span class="n">和</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">输出</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">]</span>
 </pre></div>
@@ -61,20 +60,20 @@
 </div>
 <p>说明:</p>
 <p>尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。
-要求使用空间复杂度为&nbsp;O(1) 的原地算法。</p>
+要求使用空间复杂度为 O(1) 的原地算法。</p>
 <hr class="docutils" />
 <p>把数组中的元素比作学生，坐标比作座位。然后开始换座位，nums[0] 上的同学起身坐到 nums[k+0] 座位上，nums[k+0] 上的同学被挤走，
 去到nums[k+k]座位上，反复执行；有一种情况，其中有同学被挤出来后做到了空座位，没人被挤走，此时如果还有同学坐在自己原来的位置上,
 那么就要顺着从第二个位置上的同学换位置，直到所有同学做到他最终该坐的位置上，n 个同学换 n 次，用 count 计数，count == len(nums) 时，所有同学完成换座</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<ul class="last simple">
-<li>时间复杂度：O(n)，总共移动了 n 次</li>
-<li>空间复杂度: O(1)</li>
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>时间复杂度：O(n)，总共移动了 n 次</p></li>
+<li><p>空间复杂度: O(1)</p></li>
 </ul>
 </div>
 <hr class="docutils" />
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :type nums: List[int]</span>
@@ -114,7 +113,7 @@
 </pre></div>
 </div>
 <hr class="docutils" />
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :type nums: List[int]</span>
@@ -171,47 +170,81 @@
 <li class="toctree-l2"><a class="reference internal" href="dp.html">动态规划 Dynamic Programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="TwoSum.html">1.两数之和</a></li>
 <li class="toctree-l2"><a class="reference internal" href="add-two-numbers.html">2. 两数相加</a></li>
+<li class="toctree-l2"><a class="reference internal" href="longest-substring-without-repeating-characters.html">3. 无重复字符的最长子串</a></li>
 <li class="toctree-l2"><a class="reference internal" href="longest-palindromic-substring.html">5. 最长回文子串</a></li>
 <li class="toctree-l2"><a class="reference internal" href="container-with-most-water.html">11. 盛最多水的容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="longest-common-prefix.html">14. 最长公共前缀</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3Sum.html">15. 三数之和</a></li>
 <li class="toctree-l2"><a class="reference internal" href="valid-parentheses.html">20. 有效的括号</a></li>
 <li class="toctree-l2"><a class="reference internal" href="merge-two-sorted-lists.html">21. 合并两个有序链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate-parentheses.html">22. 括号生成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge-k-sorted-lists.html">23. 合并K个排序链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reverse-nodes-in-k-group.html">25. K 个一组翻转链表</a></li>
 <li class="toctree-l2"><a class="reference internal" href="swap-nodes-in-pairs.html">24. 两两交换链表中的节点</a></li>
 <li class="toctree-l2"><a class="reference internal" href="remove-duplicates-from-sorted-array.html">26. 删除排序数组中的重复项</a></li>
 <li class="toctree-l2"><a class="reference internal" href="search-in-rotated-sorted-array.html">33. 搜索旋转排序数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first-missing-positive.html">41. 缺失的第一个正数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="trapping-rain-water.html">42. 接雨水</a></li>
+<li class="toctree-l2"><a class="reference internal" href="permutations.html">46. 全排列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="merge-intervals.html">56. 合并区间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="minimum-path-sum.html">64. 最小路径和</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plus-one.html">66. 加一</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climbing-stairs.html">70. 爬楼梯</a></li>
 <li class="toctree-l2"><a class="reference internal" href="edit-distance.html">72. 编辑距离</a></li>
+<li class="toctree-l2"><a class="reference internal" href="minimum-window-substring.html">76. 最小覆盖子串</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search-in-rotated-sorted-array-ii.html">81. 搜索旋转排序数组 II</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove-duplicates-from-sorted-list-ii.html">82. 删除排序链表中的重复元素 II</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove-duplicates-from-sorted-list.html">83. 删除排序链表中的重复元素</a></li>
 <li class="toctree-l2"><a class="reference internal" href="largest-rectangle-in-histogram.html">84. 柱状图中最大的矩形</a></li>
 <li class="toctree-l2"><a class="reference internal" href="merge-sorted-array.html">88. 合并两个有序数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validate-binary-search-tree.html">98. 验证二叉搜索树</a></li>
 <li class="toctree-l2"><a class="reference internal" href="binary-tree-level-order-traversal.html">102. 二叉树的层次遍历</a></li>
 <li class="toctree-l2"><a class="reference internal" href="binary-tree-zigzag-level-order-traversal.html">103. 二叉树的锯齿形层次遍历</a></li>
 <li class="toctree-l2"><a class="reference internal" href="maximum-depth-of-binary-tree.html">104. 二叉树的最大深度</a></li>
 <li class="toctree-l2"><a class="reference internal" href="construct-binary-tree-from-preorder-and-inorder-traversal.html">105. 从前序与中序遍历序列构造二叉树</a></li>
 <li class="toctree-l2"><a class="reference internal" href="convert-sorted-array-to-binary-search-tree.html">108. 将有序数组转换为二叉搜索树</a></li>
+<li class="toctree-l2"><a class="reference internal" href="balanced-binary-tree.html">110. 平衡二叉树</a></li>
+<li class="toctree-l2"><a class="reference internal" href="minimum-depth-of-binary-tree.html">111. 二叉树的最小深度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best-time-to-buy-and-sell-stock.html">121. 买卖股票的最佳时机</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best-time-to-buy-and-sell-stock-ii.html">122. 买卖股票的最佳时机 II</a></li>
 <li class="toctree-l2"><a class="reference internal" href="binary-tree-maximum-path-sum.html">124. 二叉树中的最大路径和</a></li>
+<li class="toctree-l2"><a class="reference internal" href="single-number.html">136. 只出现一次的数字</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linked-list-cycle.html">141. 环形链表</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linked-list-cycle-ii.html">142. 环形链表 II</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reorder-list.html">143. 重排链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lru-cache.html">146. LRU缓存机制</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Reverse-Words-in-a-String.html">151.翻转字符串里的单词</a></li>
 <li class="toctree-l2"><a class="reference internal" href="min-stack.html">155. 最小栈</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two-sum-ii-input-array-is-sorted.html">167. 两数之和 II - 输入有序数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intersection-of-two-linked-lists.html">160. 相交链表</a></li>
 <li class="toctree-l2"><a class="reference internal" href="majority-element.html">169. 多数元素</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">189. 旋转数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="house-robber.html">198. 打家劫舍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary-tree-right-side-view.html">199. 二叉树的右视图</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reverse-linked-list.html">206. 反转链表</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implement-trie-prefix-tree.html">208. 实现 Trie (前缀树)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="minimum-size-subarray-sum.html">209. 长度最小的子数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="house-robber-ii.html">213. 打家劫舍 II</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kth-largest-element-in-an-array.html">215. 数组中的第K个最大元素</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implement-stack-using-queues.html">225. 用队列实现栈</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invert-binary-tree.html">226. 翻转二叉树</a></li>
 <li class="toctree-l2"><a class="reference internal" href="implement-queue-using-stacks.html">232. 用栈实现队列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lowest-common-ancestor-of-a-binary-search-tree.html">235. 二叉搜索树的最近公共祖先</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lowest-common-ancestor-of-a-binary-tree.html">236. 二叉树的最近公共祖先</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sliding-window-maximum.html">239. 滑动窗口最大值</a></li>
 <li class="toctree-l2"><a class="reference internal" href="move-zeroes.html">283. 移动零</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ongest-increasing-subsequence.html">300. 最长上升子序列</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coin-change.html">322. 零钱兑换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="house-robber-iii.html">337. 打家劫舍 III</a></li>
 <li class="toctree-l2"><a class="reference internal" href="third-maximum-number.html">414. 第三大的数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="n-ary-tree-level-order-traversal.html">429. N叉树的层序遍历</a></li>
+<li class="toctree-l2"><a class="reference internal" href="add-two-numbers-ii.html">445. 两数相加 II</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fibonacci-number.html">509. 斐波那契数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="diameter-of-binary-tree.html">543. 二叉树的直径</a></li>
+<li class="toctree-l2"><a class="reference internal" href="degree-of-an-array.html">697. 数组的度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kth-largest-element-in-a-stream.html">703. 数据流中的第K大元素</a></li>
 <li class="toctree-l2"><a class="reference internal" href="middle-of-the-linked-list.html">876. 链表的中间结点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check-completeness-of-a-binary-tree.html">958. 二叉树的完全性检验</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../offer/index.html">剑指 Offer</a></li>
@@ -225,23 +258,21 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">LeetCode</a><ul>
       <li>Previous: <a href="majority-element.html" title="previous chapter">169. 多数元素</a></li>
-      <li>Next: <a href="reverse-linked-list.html" title="next chapter">206. 反转链表</a></li>
+      <li>Next: <a href="house-robber.html" title="next chapter">198. 打家劫舍</a></li>
   </ul></li>
   </ul></li>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -255,7 +286,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020, Justin.
+      &copy;2020, Justin|Sunjian.
       
     </div>
 
