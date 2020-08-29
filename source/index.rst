@@ -2,7 +2,7 @@ Practice makes perfect
 ====================================
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 4
     :hidden:
 
     leetcode/index

@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>124. 二叉树中的最大路径和 &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>124. 二叉树中的最大路径和<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/">https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/</a></p>
+<p>给定一个非空二叉树，返回其最大路径和。</p>
+<p>本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。</p>
+<p>示例 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+       <span class="mi">1</span>
+      <span class="o">/</span> \
+     <span class="mi">2</span>   <span class="mi">3</span>
+
+<span class="n">输出</span><span class="p">:</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<p>示例 2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+
+   <span class="o">-</span><span class="mi">10</span>
+   <span class="o">/</span> \
+  <span class="mi">9</span>  <span class="mi">20</span>
+    <span class="o">/</span>  \
+   <span class="mi">15</span>   <span class="mi">7</span>
+
+<span class="n">输出</span><span class="p">:</span> <span class="mi">42</span>
+</pre></div>
+</div>
+<p>题解：<a class="reference external" href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-30/">https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-30/</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for a binary tree node.</span>
+<span class="c1"># class TreeNode(object):</span>
+<span class="c1">#     def __init__(self, x):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.left = None</span>
+<span class="c1">#         self.right = None</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">maxPathSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type root: TreeNode</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">sum_</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sum_</span><span class="p">,</span> <span class="n">left</span><span class="o">+</span><span class="n">right</span><span class="o">+</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sum_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sum_</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin|Sunjian.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

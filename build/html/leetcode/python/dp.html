@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动态规划 Dynamic Programming &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="dynamic-programming">
+<h1>动态规划 Dynamic Programming<a class="headerlink" href="#dynamic-programming" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://labuladong.gitbook.io">https://labuladong.gitbook.io</a></p>
+<p>动态规划 和 递归和分支 没有根本区别（关键看有无最优子结构）</p>
+<ul class="simple">
+<li><p>共性：找到重复子问题</p></li>
+<li><p>差异性：最优子结构、中途可以淘汰次优解</p></li>
+</ul>
+<p>计算机其实很“傻”，只能递归或循环。动态规划其实就是要穷举所有可能的方案，所有方案中会存在一些重复的操作，我们要优化这些无用功，让计算机“聪明地”穷举。</p>
+<p>动态规划三部曲：
+1. 定义 dp table，明确 dp[i] 或者 dp[i][j] 或者更高阶的含义
+2. 确定 dp 方程，因为 dp[i] 总是会与 dp[i-1] 或者 dp[i-2] 或者其他位置的数值有着千丝万缕的联系
+3. 确定初始值</p>
+<p>多多练习，在场景中理解</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin|Sunjian.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

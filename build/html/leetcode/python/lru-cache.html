@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>146. LRU缓存机制 &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="lru">
+<h1>146. LRU缓存机制<a class="headerlink" href="#lru" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/lru-cache/">https://leetcode-cn.com/problems/lru-cache/</a></p>
+<p>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。</p>
+<p>获取数据 get(key) - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。
+写入数据 put(key, value) - 如果密钥不存在，则写入其数据值。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p>
+<p>进阶:</p>
+<p>你是否可以在 O(1) 时间复杂度内完成这两种操作？</p>
+<p>示例:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LRUCache</span> <span class="n">cache</span> <span class="o">=</span> <span class="n">new</span> <span class="n">LRUCache</span><span class="p">(</span> <span class="mi">2</span> <span class="o">/*</span> <span class="n">缓存容量</span> <span class="o">*/</span> <span class="p">);</span>
+
+<span class="n">cache</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>       <span class="o">//</span> <span class="n">返回</span>  <span class="mi">1</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>    <span class="o">//</span> <span class="n">该操作会使得密钥</span> <span class="mi">2</span> <span class="n">作废</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>       <span class="o">//</span> <span class="n">返回</span> <span class="o">-</span><span class="mi">1</span> <span class="p">(</span><span class="n">未找到</span><span class="p">)</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>    <span class="o">//</span> <span class="n">该操作会使得密钥</span> <span class="mi">1</span> <span class="n">作废</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>       <span class="o">//</span> <span class="n">返回</span> <span class="o">-</span><span class="mi">1</span> <span class="p">(</span><span class="n">未找到</span><span class="p">)</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>       <span class="o">//</span> <span class="n">返回</span>  <span class="mi">3</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>       <span class="o">//</span> <span class="n">返回</span>  <span class="mi">4</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ListNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pre</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">class</span> <span class="nc">LinkedList</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tail</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tail</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">pre</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tail</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">pre</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">add_first</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">pre</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">pre</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">pre</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">pre</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">pre</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">pre</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">get_last</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">pre</span>
+
+<span class="k">class</span> <span class="nc">LRUCache</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type capacity: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">capacity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linkedlist</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type key: int</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type key: int</span>
+<span class="sd">        :type value: int</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">linkedlist</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">linkedlist</span><span class="o">.</span><span class="n">add_first</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">linkedlist</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+                <span class="n">last</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linkedlist</span><span class="o">.</span><span class="n">get_last</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">last</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">linkedlist</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">last</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">linkedlist</span><span class="o">.</span><span class="n">add_first</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span>  <span class="n">node</span>
+
+
+
+<span class="c1"># Your LRUCache object will be instantiated and called as such:</span>
+<span class="c1"># obj = LRUCache(capacity)</span>
+<span class="c1"># param_1 = obj.get(key)</span>
+<span class="c1"># obj.put(key,value)</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin|Sunjian.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>143. 重排链表 &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>143. 重排链表<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/reorder-list/">https://leetcode-cn.com/problems/reorder-list/</a></p>
+<p>给定一个单链表 L：L0→L1→…→Ln-1→Ln ，
+将其重新排列后变为： L0→Ln→L1→Ln-1→L2→Ln-2→…</p>
+<p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+<p>示例 1:</p>
+<p>给定链表 1-&gt;2-&gt;3-&gt;4, 重新排列为 1-&gt;4-&gt;2-&gt;3.
+示例 2:</p>
+<p>给定链表 1-&gt;2-&gt;3-&gt;4-&gt;5, 重新排列为 1-&gt;5-&gt;2-&gt;4-&gt;3.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for singly-linked list.</span>
+<span class="c1"># class ListNode(object):</span>
+<span class="c1">#     def __init__(self, x):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.next = None</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">reorderList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type head: ListNode</span>
+<span class="sd">        :rtype: None Do not return anything, modify head in-place instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">head</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">node_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
+            <span class="n">node_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
+
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">node_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">node_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">node_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>通过观察，可以将重排链表分解为以下三个步骤：</p>
+<p>首先重新排列后，链表的中心节点会变为最后一个节点。所以需要先找到链表的中心节点
+可以按照中心节点将原始链表划分为左右两个链表。
+2.1. 按照中心节点将原始链表划分为左右两个链表，左链表：1-&gt;2-&gt;3 右链表：4-&gt;5。
+2.2. 将右链表反转，就正好是重排链表交换的顺序，右链表反转：5-&gt;4。
+合并两个链表，将右链表插入到左链表，即可重新排列成：1-&gt;5-&gt;2-&gt;4-&gt;3.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for singly-linked list.</span>
+<span class="c1"># class ListNode(object):</span>
+<span class="c1">#     def __init__(self, x):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.next = None</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">reorderList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type head: ListNode</span>
+<span class="sd">        :rtype: None Do not return anything, modify head in-place instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">head</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">middle_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_middle</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">middle_node</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">middle_node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">find_middle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="k">while</span> <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">return</span> <span class="n">slow</span>
+
+    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+        <span class="n">pre</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">pre</span>
+            <span class="n">pre</span> <span class="o">=</span> <span class="n">cur</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">tmp</span>
+        <span class="k">return</span> <span class="n">pre</span>
+
+    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">left</span> <span class="ow">and</span> <span class="n">right</span><span class="p">:</span>
+            <span class="n">left_temp</span> <span class="o">=</span> <span class="n">left</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">right_temp</span> <span class="o">=</span> <span class="n">right</span><span class="o">.</span><span class="n">next</span>
+
+            <span class="n">left</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">right</span><span class="p">;</span>
+            <span class="n">right</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">left_temp</span>
+
+            <span class="n">left</span> <span class="o">=</span> <span class="n">left_temp</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">right_temp</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin|Sunjian.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

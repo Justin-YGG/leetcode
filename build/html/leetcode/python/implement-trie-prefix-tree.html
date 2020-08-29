@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>208. 实现 Trie (前缀树) &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="trie">
+<h1>208. 实现 Trie (前缀树)<a class="headerlink" href="#trie" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/">https://leetcode-cn.com/problems/implement-trie-prefix-tree/</a></p>
+<p>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。</p>
+<p>示例:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Trie</span> <span class="n">trie</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Trie</span><span class="p">();</span>
+
+<span class="n">trie</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">);</span>
+<span class="n">trie</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">);</span>   <span class="o">//</span> <span class="n">返回</span> <span class="n">true</span>
+<span class="n">trie</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;app&quot;</span><span class="p">);</span>     <span class="o">//</span> <span class="n">返回</span> <span class="n">false</span>
+<span class="n">trie</span><span class="o">.</span><span class="n">startsWith</span><span class="p">(</span><span class="s2">&quot;app&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">返回</span> <span class="n">true</span>
+<span class="n">trie</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;app&quot;</span><span class="p">);</span>
+<span class="n">trie</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;app&quot;</span><span class="p">);</span>     <span class="o">//</span> <span class="n">返回</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>说明:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>你可以假设所有的输入都是由小写字母 a-z 构成的。
+保证所有输入均为非空字符串。
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Trie</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize your data structure here.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_of_word</span> <span class="o">=</span> <span class="s1">&#39;#&#39;</span>
+
+
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inserts a word into the trie.</span>
+<span class="sd">        :type word: str</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">node</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">end_of_word</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_of_word</span>
+
+
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns if the word is in the trie.</span>
+<span class="sd">        :type word: str</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">char</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_of_word</span> <span class="ow">in</span> <span class="n">node</span>
+
+
+    <span class="k">def</span> <span class="nf">startsWith</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns if there is any word in the trie that starts with the given prefix.</span>
+<span class="sd">        :type prefix: str</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">prefix</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">char</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="c1"># Your Trie object will be instantiated and called as such:</span>
+<span class="c1"># obj = Trie()</span>
+<span class="c1"># obj.insert(word)</span>
+<span class="c1"># param_2 = obj.search(word)</span>
+<span class="c1"># param_3 = obj.startsWith(prefix)</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin|Sunjian.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

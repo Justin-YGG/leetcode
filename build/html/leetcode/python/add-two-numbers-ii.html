@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>445. 两数相加 II &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="ii">
+<h1>445. 两数相加 II<a class="headerlink" href="#ii" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/add-two-numbers-ii/">https://leetcode-cn.com/problems/add-two-numbers-ii/</a></p>
+<p>给定两个非空链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储单个数字。将这两数相加会返回一个新的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数字都不会以零开头。</p>
+<p>进阶:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>如果输入链表不能修改该如何处理？换句话说，你不能对列表中的节点进行翻转。
+
+示例:
+
+输入: (7 -&gt; 2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
+输出: 7 -&gt; 8 -&gt; 0 -&gt; 7
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for singly-linked list.</span>
+<span class="c1"># class ListNode(object):</span>
+<span class="c1">#     def __init__(self, x):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.next = None</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">addTwoNumbers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type l1: ListNode</span>
+<span class="sd">        :type l2: ListNode</span>
+<span class="sd">        :rtype: ListNode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">push_stack</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">stack</span><span class="p">):</span>
+            <span class="k">while</span> <span class="n">l</span><span class="p">:</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+                <span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">next</span>
+
+        <span class="n">stack1</span><span class="p">,</span> <span class="n">stack2</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="n">push_stack</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">stack1</span><span class="p">)</span>
+        <span class="n">push_stack</span><span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">stack2</span><span class="p">)</span>
+        <span class="n">dummy</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">carry</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">stack1</span> <span class="ow">or</span> <span class="n">stack2</span> <span class="ow">or</span> <span class="n">carry</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">stack1</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">.</span><span class="n">val</span> <span class="k">if</span> <span class="n">stack1</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">stack2</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">.</span><span class="n">val</span> <span class="k">if</span> <span class="n">stack2</span> <span class="k">else</span> <span class="mi">0</span>
+
+            <span class="n">sum_</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">carry</span>
+            <span class="n">carry</span> <span class="o">=</span> <span class="n">sum_</span> <span class="o">/</span> <span class="mi">10</span>
+            <span class="n">sum_</span> <span class="o">=</span> <span class="n">sum_</span> <span class="o">%</span> <span class="mi">10</span>
+
+            <span class="c1"># 头插法</span>
+            <span class="n">new_node</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">sum_</span><span class="p">)</span>
+            <span class="n">new_node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">dummy</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">dummy</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">new_node</span>
+        <span class="k">return</span> <span class="n">dummy</span><span class="o">.</span><span class="n">next</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin|Sunjian.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

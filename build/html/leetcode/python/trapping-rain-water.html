@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>42. 接雨水 &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="46. 全排列" href="permutations.html" />
+    <link rel="prev" title="41. 缺失的第一个正数" href="first-missing-positive.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>42. 接雨水<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/trapping-rain-water/">https://leetcode-cn.com/problems/trapping-rain-water/</a></p>
+<p>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
+<img alt="../../_images/42.png" src="../../_images/42.png" />
+<p>上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Marcos 贡献此图。</p>
+<p>示例:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">输出</span><span class="p">:</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>FYI:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.cnblogs.com/grandyang/p/8887985.html">https://www.cnblogs.com/grandyang/p/8887985.html</a></p></li>
+<li><p><a class="reference external" href="https://leetcode-cn.com/problems/trapping-rain-water/solution/bao-li-jie-fa-yi-kong-jian-huan-shi-jian-zhi-zhen-/">https://leetcode-cn.com/problems/trapping-rain-water/solution/bao-li-jie-fa-yi-kong-jian-huan-shi-jian-zhi-zhen-/</a></p></li>
+</ul>
+<p>首先理解``单调栈 Monotone Stack``，以``单调递减栈``为例，比如有一家店在发 free food，很多人在排队，于是你也赶过去凑热闹。但是由于来晚了，队伍已经很长了，想着不然就插个队啥的。但发现排在队伍最前面的都是一些有纹身的大佬，惹不起。于是往队伍后面走，发现是一群小屁孩，直接全部撵走，然后排在了社会大佬们的后面。那么这就是一个单调递减的栈，按实力递减。</p>
+<p><strong>单调栈的一大优势就是线性的时间复杂度，所有的元素只会进栈一次，而且一旦出栈后就不会再进来了</strong></p>
+<ul class="simple">
+<li><p>单调递减栈可以找到 <code class="docutils literal notranslate"><span class="pre">左起第一个</span></code> 比当前数字 <code class="docutils literal notranslate"><span class="pre">大</span></code> 的元素</p></li>
+<li><p>单调递增栈可以找到 <code class="docutils literal notranslate"><span class="pre">左起第一个</span></code> 比当前数字 <code class="docutils literal notranslate"><span class="pre">小</span></code> 的元素</p></li>
+</ul>
+<p>对于此题，如果能盛水，需要两边高，中间低。</p>
+<p>使用一个单调递减栈，将递减的边界存进去，一旦发现当前的数字大于栈顶元素了，那么就有可能会有能装水的地方产生。此时我们当前的数字是右边界，我们从栈中至少需要有两个数字，才能形成一个坑槽，先取出的那个最小的数字，就是坑槽的最低点，再次取出的数字就是左边界，我们比较左右边界，取其中较小的值为装水的边界，然后此高度减去水槽最低点的高度，乘以左右边界间的距离就是装水量。</p>
+<p><strong>注意：栈中存的数字并不是递减的高度，而是递减的高度的坐标</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><p>时间复杂度：O(n)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>单次遍历 O(n) ，每个条形块最多访问两次（由于栈的弹入和弹出），并且弹入和弹出栈都是 O(1) 的</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>空间复杂度：O(n)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>栈最多在阶梯型或平坦型条形块结构中占用 O(n) 的空间</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">trap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type height: List[int]</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">height</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">height</span><span class="p">)):</span>
+            <span class="c1"># 每次循环，其实是在填平</span>
+            <span class="k">while</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">height</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">bottom_index</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">stack</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">res</span> <span class="o">+=</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">height</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">height</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">height</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">LeetCode</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">LeetCode-Python</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="template.html">模板</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dp.html">动态规划 Dynamic Programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TwoSum.html">1.两数之和</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-two-numbers.html">2. 两数相加</a></li>
+<li class="toctree-l3"><a class="reference internal" href="longest-substring-without-repeating-characters.html">3. 无重复字符的最长子串</a></li>
+<li class="toctree-l3"><a class="reference internal" href="longest-palindromic-substring.html">5. 最长回文子串</a></li>
+<li class="toctree-l3"><a class="reference internal" href="container-with-most-water.html">11. 盛最多水的容器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="longest-common-prefix.html">14. 最长公共前缀</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3Sum.html">15. 三数之和</a></li>
+<li class="toctree-l3"><a class="reference internal" href="valid-parentheses.html">20. 有效的括号</a></li>
+<li class="toctree-l3"><a class="reference internal" href="merge-two-sorted-lists.html">21. 合并两个有序链表</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate-parentheses.html">22. 括号生成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="merge-k-sorted-lists.html">23. 合并K个排序链表</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reverse-nodes-in-k-group.html">25. K 个一组翻转链表</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swap-nodes-in-pairs.html">24. 两两交换链表中的节点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="remove-duplicates-from-sorted-array.html">26. 删除排序数组中的重复项</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search-in-rotated-sorted-array.html">33. 搜索旋转排序数组</a></li>
+<li class="toctree-l3"><a class="reference internal" href="first-missing-positive.html">41. 缺失的第一个正数</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">42. 接雨水</a></li>
+<li class="toctree-l3"><a class="reference internal" href="permutations.html">46. 全排列</a></li>
+<li class="toctree-l3"><a class="reference internal" href="merge-intervals.html">56. 合并区间</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minimum-path-sum.html">64. 最小路径和</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plus-one.html">66. 加一</a></li>
+<li class="toctree-l3"><a class="reference internal" href="climbing-stairs.html">70. 爬楼梯</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edit-distance.html">72. 编辑距离</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minimum-window-substring.html">76. 最小覆盖子串</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search-in-rotated-sorted-array-ii.html">81. 搜索旋转排序数组 II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="remove-duplicates-from-sorted-list-ii.html">82. 删除排序链表中的重复元素 II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="remove-duplicates-from-sorted-list.html">83. 删除排序链表中的重复元素</a></li>
+<li class="toctree-l3"><a class="reference internal" href="largest-rectangle-in-histogram.html">84. 柱状图中最大的矩形</a></li>
+<li class="toctree-l3"><a class="reference internal" href="merge-sorted-array.html">88. 合并两个有序数组</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validate-binary-search-tree.html">98. 验证二叉搜索树</a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary-tree-level-order-traversal.html">102. 二叉树的层次遍历</a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary-tree-zigzag-level-order-traversal.html">103. 二叉树的锯齿形层次遍历</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maximum-depth-of-binary-tree.html">104. 二叉树的最大深度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="construct-binary-tree-from-preorder-and-inorder-traversal.html">105. 从前序与中序遍历序列构造二叉树</a></li>
+<li class="toctree-l3"><a class="reference internal" href="convert-sorted-array-to-binary-search-tree.html">108. 将有序数组转换为二叉搜索树</a></li>
+<li class="toctree-l3"><a class="reference internal" href="balanced-binary-tree.html">110. 平衡二叉树</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minimum-depth-of-binary-tree.html">111. 二叉树的最小深度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="best-time-to-buy-and-sell-stock.html">121. 买卖股票的最佳时机</a></li>
+<li class="toctree-l3"><a class="reference internal" href="best-time-to-buy-and-sell-stock-ii.html">122. 买卖股票的最佳时机 II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary-tree-maximum-path-sum.html">124. 二叉树中的最大路径和</a></li>
+<li class="toctree-l3"><a class="reference internal" href="single-number.html">136. 只出现一次的数字</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linked-list-cycle.html">141. 环形链表</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linked-list-cycle-ii.html">142. 环形链表 II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reorder-list.html">143. 重排链表</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lru-cache.html">146. LRU缓存机制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Reverse-Words-in-a-String.html">151.翻转字符串里的单词</a></li>
+<li class="toctree-l3"><a class="reference internal" href="min-stack.html">155. 最小栈</a></li>
+<li class="toctree-l3"><a class="reference internal" href="two-sum-ii-input-array-is-sorted.html">167. 两数之和 II - 输入有序数组</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intersection-of-two-linked-lists.html">160. 相交链表</a></li>
+<li class="toctree-l3"><a class="reference internal" href="majority-element.html">169. 多数元素</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rotate-array.html">189. 旋转数组</a></li>
+<li class="toctree-l3"><a class="reference internal" href="house-robber.html">198. 打家劫舍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="binary-tree-right-side-view.html">199. 二叉树的右视图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reverse-linked-list.html">206. 反转链表</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implement-trie-prefix-tree.html">208. 实现 Trie (前缀树)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minimum-size-subarray-sum.html">209. 长度最小的子数组</a></li>
+<li class="toctree-l3"><a class="reference internal" href="house-robber-ii.html">213. 打家劫舍 II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kth-largest-element-in-an-array.html">215. 数组中的第K个最大元素</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implement-stack-using-queues.html">225. 用队列实现栈</a></li>
+<li class="toctree-l3"><a class="reference internal" href="invert-binary-tree.html">226. 翻转二叉树</a></li>
+<li class="toctree-l3"><a class="reference internal" href="implement-queue-using-stacks.html">232. 用栈实现队列</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lowest-common-ancestor-of-a-binary-search-tree.html">235. 二叉搜索树的最近公共祖先</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lowest-common-ancestor-of-a-binary-tree.html">236. 二叉树的最近公共祖先</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sliding-window-maximum.html">239. 滑动窗口最大值</a></li>
+<li class="toctree-l3"><a class="reference internal" href="move-zeroes.html">283. 移动零</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ongest-increasing-subsequence.html">300. 最长上升子序列</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coin-change.html">322. 零钱兑换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="house-robber-iii.html">337. 打家劫舍 III</a></li>
+<li class="toctree-l3"><a class="reference internal" href="third-maximum-number.html">414. 第三大的数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="n-ary-tree-level-order-traversal.html">429. N叉树的层序遍历</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add-two-numbers-ii.html">445. 两数相加 II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fibonacci-number.html">509. 斐波那契数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diameter-of-binary-tree.html">543. 二叉树的直径</a></li>
+<li class="toctree-l3"><a class="reference internal" href="degree-of-an-array.html">697. 数组的度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kth-largest-element-in-a-stream.html">703. 数据流中的第K大元素</a></li>
+<li class="toctree-l3"><a class="reference internal" href="middle-of-the-linked-list.html">876. 链表的中间结点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="check-completeness-of-a-binary-tree.html">958. 二叉树的完全性检验</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">LeetCode</a><ul>
+  <li><a href="index.html">LeetCode-Python</a><ul>
+      <li>Previous: <a href="first-missing-positive.html" title="previous chapter">41. 缺失的第一个正数</a></li>
+      <li>Next: <a href="permutations.html" title="next chapter">46. 全排列</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin|Sunjian.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

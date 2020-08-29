@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>25. K 个一组翻转链表 &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="k">
+<h1>25. K 个一组翻转链表<a class="headerlink" href="#k" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/reverse-nodes-in-k-group/">https://leetcode-cn.com/problems/reverse-nodes-in-k-group/</a></p>
+<p>给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。</p>
+<p>k 是一个正整数，它的值小于或等于链表的长度。</p>
+<p>如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。</p>
+<p>示例：</p>
+<p>给你这个链表：1-&gt;2-&gt;3-&gt;4-&gt;5</p>
+<p>当 k = 2 时，应当返回: 2-&gt;1-&gt;4-&gt;3-&gt;5</p>
+<p>当 k = 3 时，应当返回: 3-&gt;2-&gt;1-&gt;4-&gt;5</p>
+<p>说明：</p>
+<p>你的算法只能使用常数的额外空间。
+你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>时间复杂度：O(n)</p></li>
+</ul>
+<p>Same as the iterative solution. It is because that in each function call, we need to first check if there are k nodes left starting from input head, and if there is, we have to reverse them. So two linear scans are still necessary.</p>
+<ul class="simple">
+<li><p>空间复杂度：O(n/k)</p></li>
+</ul>
+<p>With recursion, we need to take the cost of call stacks into consideration. For every k nodes, we are supposed to recursively call the function for once. So the total number of recursive calls is n / k. Within each function, we are still using a couple of pointers only in this algorithm, so they are constant cost. Thus, the total space complexity is O(n / k).</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for singly-linked list.</span>
+<span class="c1"># class ListNode(object):</span>
+<span class="c1">#     def __init__(self, x):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.next = None</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">reverseKGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type head: ListNode</span>
+<span class="sd">        :type k: int</span>
+<span class="sd">        :rtype: ListNode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">head</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+           <span class="k">return</span>
+        <span class="n">node_a</span> <span class="o">=</span> <span class="n">node_b</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">node_b</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">head</span>
+            <span class="n">node_b</span> <span class="o">=</span> <span class="n">node_b</span><span class="o">.</span><span class="n">next</span>
+
+        <span class="c1"># 上面遍历完成后，node_b 是下一组的头结点，统一也是翻转部分连接的退出条件，等价于正常翻转数组的null</span>
+        <span class="n">new_head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span>
+        <span class="n">node_a</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverseKGroup</span><span class="p">(</span><span class="n">node_b</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_head</span>
+
+    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">):</span>
+        <span class="n">pre</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">node_a</span>
+        <span class="k">while</span> <span class="n">cur</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">node_b</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">pre</span>
+            <span class="n">pre</span> <span class="o">=</span> <span class="n">cur</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">tmp</span>
+        <span class="k">return</span> <span class="n">pre</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin|Sunjian.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>429. N叉树的层序遍历 &#8212; leetcode 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="n">
+<h1>429. N叉树的层序遍历<a class="headerlink" href="#n" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/submissions/">https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/submissions/</a></p>
+<p>给定一个 N 叉树，返回其节点值的层序遍历。 (即从左到右，逐层遍历)。</p>
+<p>例如，给定一个 3叉树 :</p>
+<img alt="../../_images/429.png" src="../../_images/429.png" />
+<p>返回其层序遍历:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+     <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>说明:</p>
+<ul class="simple">
+<li><p>树的深度不会超过 1000。</p></li>
+<li><p>树的节点总数不会超过 5000。</p></li>
+</ul>
+<hr class="docutils" />
+<p>注意列表推导时多层循环的写法：</p>
+<p><code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">&lt;RETURNED_VALUE&gt;</span>&#160; <span class="pre">&lt;OUTER_LOOP1&gt;</span>&#160; <span class="pre">&lt;INNER_LOOP2&gt;</span>&#160; <span class="pre">&lt;INNER_LOOP3&gt;</span> <span class="pre">...</span> <span class="pre">&lt;OPTIONAL_IF&gt;</span> <span class="pre">]</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>时间复杂度：O(n)</p></li>
+<li><p>空间复杂度：O(n)</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># Definition for a Node.</span>
+<span class="sd">class Node(object):</span>
+<span class="sd">    def __init__(self, val=None, children=None):</span>
+<span class="sd">        self.val = val</span>
+<span class="sd">        self.children = children</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">levelOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type root: Node</span>
+<span class="sd">        :rtype: List[List[int]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">q</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">],</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="nb">any</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">val</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">q</span><span class="p">)</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">q</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span> <span class="k">if</span> <span class="n">c</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=Justin-YGG&repo=leetcode&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Justin|Sunjian.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
