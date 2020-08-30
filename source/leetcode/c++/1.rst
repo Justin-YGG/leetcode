@@ -1,0 +1,40 @@
+===============
+1. 两数之和
+===============
+
+https://leetcode-cn.com/problems/two-sum/
+
+给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
+
+- 示例
+
+::
+
+	给定 nums = [2, 7, 11, 15], target = 9
+	因为 nums[0] + nums[1] = 2 + 7 = 9
+	所以返回 [0, 1]
+
+.. tip::
+
+	最容易想到的办法是用两层循环暴力解决，但是比较费时。可以用哈希表的方式将数字和其所对应的下标保存下来，这样可以实现O(1)时间的查找。需要注意的是如果存在相同的数字，后边数字的下标会覆盖之前的，但是遍历的时候是从头开始的，这样不会对结果造成影响。
+
+- 代码
+
+.. code-block:: c++
+
+	class Solution {
+	public:
+	    vector<int> twoSum(vector<int>& nums, int target) {
+	        int n=nums.size();
+	        unordered_map<int,int> m; //用哈希的方式保存数字和其下标
+	        for(int i=0;i<n;i++)
+	            m[nums[i]]=i;
+	        for(int i=0;i<n;i++){
+	            if(m.count(nums[i])&&m.count(target-nums[i])){
+	                if(i!=m[target-nums[i]]) // 防止重复使用
+	                    return vector<int>{i,m[target-nums[i]]};
+	            }
+	        }
+	        return vector<int>{-1,-1};
+	    }
+	};
