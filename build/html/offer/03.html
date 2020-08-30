@@ -1,18 +1,19 @@
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>面试题03. 数组中重复的数字 &#8212; leetcode 1.0 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="面试题05. 替换空格" href="05.html" />
@@ -46,23 +47,22 @@
 </div>
 <p>限制：</p>
 <blockquote>
-<div><p>2 &lt;= n &lt;= 100000</p>
-</div></blockquote>
+<div>2 &lt;= n &lt;= 100000</div></blockquote>
 <hr class="docutils" />
 <p><strong>方法一：</strong> 哈希表</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="first admonition-title">Tip</p>
 <p>遍历数组时判断是否在哈希表中存在，如果存在就找到了一个重复的数字。</p>
-<p><code class="docutils literal notranslate"><span class="pre">此法需要额外的空间开销</span></code></p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">此法需要额外的空间开销</span></code></p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>时间复杂度：O(n)</p></li>
-<li><p>空间复杂度：O(n)</p></li>
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
 </ul>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">findRepeatNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :type nums: List[int]</span>
@@ -78,7 +78,7 @@
 <hr class="docutils" />
 <p><strong>方法二：</strong> 下标定位法</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="first admonition-title">Tip</p>
 <p>如题描述，长度为 n 的数组，数字都在 0～n-1 的范围内，如果没有重复的数字，
 则数字 i 应该出现在 nums[i] 位置，即 num[i] = i;</p>
 <p>假设数组长度为 7，则数字范围是 [0, 6]。</p>
@@ -86,16 +86,16 @@
 <p>我们从第一个篮子开始检验，如果篮子里面球的编号和篮子编号一致，检验合格；
 如果发现篮子里面球的编号和篮子编号不一致，我们怀疑 <code class="docutils literal notranslate"><span class="pre">当前这个球</span></code> 和 <code class="docutils literal notranslate"><span class="pre">本该在这个篮子的球</span></code> 偷偷换了位置，让当前这个球滚回与其编号一致的篮子，并把在它篮子里的球换回来；
 如果换回来的球与篮子编号还不一致，同理，继续更换；如果在更换过程中，让当前球滚去其该再的位置时，发现已经有相同的球在那了，我们就找到了 <code class="docutils literal notranslate"><span class="pre">重复的数字</span></code> 。</p>
-<p><code class="docutils literal notranslate"><span class="pre">此法改变了原数组</span></code></p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">此法改变了原数组</span></code></p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>时间复杂度：O(n)</p></li>
-<li><p>空间复杂度：O(1)</p></li>
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
 </ul>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">findRepeatNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :type nums: List[int]</span>
@@ -111,9 +111,9 @@
 </pre></div>
 </div>
 <hr class="docutils" />
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>不改变原数组解法</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">不改变原数组解法</p>
 </div>
 </div>
 
@@ -174,15 +174,17 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
+  <h3>Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script type="text/javascript">$('#searchbox').show(0);</script>
 
 
 
