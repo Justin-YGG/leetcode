@@ -45,10 +45,10 @@
 <span class="n">所以返回</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>分析</p></li>
-</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>最容易想到的办法是用两层循环暴力解决，但是比较费时。可以用哈希表的方式将数字和其所对应的下标保存下来，这样可以实现O(1)时间的查找。需要注意的是如果存在相同的数字，后边数字的下标会覆盖之前的，但是遍历的时候是从头开始的，这样不会对结果造成影响。</p>
+</div>
 <ul class="simple">
 <li><p>代码</p></li>
 </ul>
