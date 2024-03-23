@@ -14,11 +14,3 @@ Practice makes perfect
     offer/index
     collections/index
     lcci/index
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
