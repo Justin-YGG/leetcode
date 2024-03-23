@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html lang="zh" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>排序算法总结 &#8212; leetcode  文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=2ccfc426"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="二分查找" href="binary-search.html" />
+    <link rel="prev" title="合集" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>排序算法总结<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><strong>原地排序（Sorted in place）算法</strong>：特指空间复杂度是 O(1) 的排序算法</p></li>
+<li><p><strong>稳定性</strong>：如果待排序的序列中存在值相等的元素，经过排序之后，相等元素之间原有的先后顺序不变</p></li>
+</ul>
+<section id="id2">
+<h2><strong>基于比较的算法</strong><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="bubble-sort">
+<h3><code class="docutils literal notranslate"><span class="pre">冒泡排序（Bubble</span> <span class="pre">Sort）</span></code><a class="headerlink" href="#bubble-sort" title="Link to this heading">¶</a></h3>
+<p>冒泡排序只会操作相邻的两个数据。每次冒泡操作都会对相邻的两个元素进行比较，看是否满足大小关系要求。
+如果不满足就让它俩互换。<code class="docutils literal notranslate"><span class="pre">一次冒泡会让至少一个元素移动到它应该在的位置</span></code> ，重复 n 次，就完成了 n 个数据的排序工作;</p>
+<p><code class="docutils literal notranslate"><span class="pre">如同水中气泡向上升</span></code></p>
+<img alt="_static/images/bubble_sort.jpg" src="_static/images/bubble_sort.jpg" />
+<p><code class="docutils literal notranslate"><span class="pre">当某次冒泡操作已经没有数据交换时，说明已经达到完全有序，不用再继续执行后续的冒泡操作，增加一个</span> <span class="pre">flag</span> <span class="pre">标志位来判断</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<ul>
+<li><p>是 <code class="docutils literal notranslate"><span class="pre">稳定的算法</span></code></p>
+<blockquote>
+<div><p>只有交换才可以改变两个元素的前后顺序。为了保证冒泡排序算法的稳定性，当有相邻的两个元素大小相等的时候，我们不做交换，
+相同大小的数据在排序前后不会改变顺序，所以冒泡排序是稳定的排序算法</p>
+</div></blockquote>
+</li>
+<li><p>是 <code class="docutils literal notranslate"><span class="pre">原地算法</span></code>，无需额外的空间，空间复杂度为：O(1)</p></li>
+<li><p>时间复杂度：O(n^2)</p>
+<blockquote>
+<div><p>最坏情况时间复杂度：O(n^2)，数组逆序，需要 <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">次冒泡</span></code></p>
+<p>最好情况时间复杂度：O(n)，数组为有序，只需 <code class="docutils literal notranslate"><span class="pre">一次冒泡</span></code></p>
+<p>平均时间复杂度：O(n^2)</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">array</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>  <span class="c1"># 从第二个元素开始比较</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># 已经经过 i 次冒泡，array[length-i]及之后的数据都是升上去的，已经有序</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># 注意冒泡之后，不要忘了修改状态</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">array</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="insertion-sort">
+<h3><code class="docutils literal notranslate"><span class="pre">插入排序（Insertion</span> <span class="pre">Sort）</span></code><a class="headerlink" href="#insertion-sort" title="Link to this heading">¶</a></h3>
+<p>插入排序，顾明思议，就是通过找到对应位置插入的方式进行排序</p>
+<img alt="_static/images/insertion_sort.jpg" src="_static/images/insertion_sort.jpg" />
+<div class="admonition tip">
+<p class="admonition-title">小技巧</p>
+<p>想象桌子上顺序排列着，数字朝下的扑克，用右手依次拿起扑克放入左手，左手中的牌都是有序的；如果左手中无牌，直接放进左手；
+如果左手中已经有牌，从 <code class="docutils literal notranslate"><span class="pre">小拇指向大拇指</span></code> 方向上的左手牌依次与右手牌比大小，如果右手牌较小，左手牌往小拇指
+方向移动一个位置，给右手牌腾地儿，至于右手牌能不能插入这个位置，还有继续往大拇指方向进行
+比较，直到右手牌比左手牌大，此时左手当前牌的位置 <code class="docutils literal notranslate"><span class="pre">+1</span></code> 就是右手牌要插入的位置</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<ul>
+<li><p>是 <code class="docutils literal notranslate"><span class="pre">稳定的算法</span></code></p>
+<blockquote>
+<div><p>对于值相同的元素，我们可以选择将后面出现的元素，插入到前面出现元素的后面，这样就可以保持原有的前后顺序不变</p>
+</div></blockquote>
+</li>
+<li><p>是 <code class="docutils literal notranslate"><span class="pre">原地算法</span></code></p>
+<blockquote>
+<div><p>无需额外的空间，空间复杂度为：O(1)</p>
+</div></blockquote>
+</li>
+<li><p>时间复杂度：O(n^2)</p>
+<blockquote>
+<div><p>插入排序包含两种操作：<code class="docutils literal notranslate"><span class="pre">比较</span></code> 和 <code class="docutils literal notranslate"><span class="pre">移动</span></code>:</p>
+<p>最坏情况时间复杂度：O(n^2)，数组是逆序的，每个原来都需要比较 <code class="docutils literal notranslate"><span class="pre">i</span></code> 次，移动 <code class="docutils literal notranslate"><span class="pre">i</span></code> 次（<code class="docutils literal notranslate"><span class="pre">i</span></code> 为当前元素下标），
+所以 O(n) = 2*(1) + 2*（2)+ ... + 2*(n-1)，故 O(n) = n^2</p>
+<p>最好情况时间复杂度：O(n)，数组为有序，只需与 <code class="docutils literal notranslate"><span class="pre">左边有序部分最后一个元素</span></code> 做一次比较即可</p>
+<p>平均时间复杂度：O(n^2)，每次插入操作都相当于在数组中插入一个数据，循环执行 n 次插入操作，所以平均时间复杂度为 O(n2)</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">insertion_sort</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="c1"># 只有一个数，无需排序</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">array</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="c1"># 右手起牌</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># 小拇指位置</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">key</span><span class="p">):</span>
+            <span class="c1"># 后移一位，给右手牌腾地儿</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="c1"># 下一个要参与比较的左手牌</span>
+            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+    <span class="k">return</span> <span class="n">array</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="selection-sort">
+<h3><strong>选择排序（Selection Sort）</strong><a class="headerlink" href="#selection-sort" title="Link to this heading">¶</a></h3>
+<p>选择排序每次会从未排序区间中找到最小的元素，将其放到已排序区间的末尾</p>
+<img alt="_static/images/selection_sort.jpg" src="_static/images/selection_sort.jpg" />
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<ul>
+<li><p>不是 <code class="docutils literal notranslate"><span class="pre">稳定的算法</span></code></p>
+<blockquote>
+<div><p>比如 5，8，5，2，9 这样一组数据，使用选择排序算法来排序的话，第一次找到最小元素 2，
+与第一个 5 交换位置，那第一个 5 和中间的 5 顺序就变了</p>
+</div></blockquote>
+</li>
+<li><p>是 <code class="docutils literal notranslate"><span class="pre">原地算法</span></code>，无需额外的空间，空间复杂度为：O(1)</p></li>
+<li><p>时间复杂度：O(n^2</p>
+<blockquote>
+<div><p>总的比较次数 N = (n-1)+(n-2)+...+1 = n*(n-1)/2。交换次数 O(n)，最好情况是，已经有序，交换 0 次；最坏情况是，逆序，交换 n-1 次</p>
+<p>最坏情况时间复杂度：O(n^2)，</p>
+<p>最好情况时间复杂度：O(n^2)</p>
+<p>平均时间复杂度：O(n^2)</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">selection_sort</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+        <span class="n">min_idx</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">array</span><span class="p">[</span><span class="n">min_idx</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">min_idx</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">min_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">min_idx</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">array</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="merge-sort">
+<h3><strong>归并排序（Merge Sort）</strong><a class="headerlink" href="#merge-sort" title="Link to this heading">¶</a></h3>
+<p><strong>归并排序的核心思想是先将数组分成两部分，然后将两部分别排序，然后再合并这两个有序的子数组。归并排序使用的是分治思想，将大问题化为小问题，分而治之，利用递归实现</strong></p>
+<img alt="_static/images/merge_sort.jpg" src="_static/images/merge_sort.jpg" />
+<section id="merge">
+<h4><strong>Merge</strong><a class="headerlink" href="#merge" title="Link to this heading">¶</a></h4>
+<p>先来解决，如何合并两个有序数组？</p>
+<div class="admonition tip">
+<p class="admonition-title">小技巧</p>
+<p><strong>如果数组 A[p, ..., q, ..., r] 中 A[p,...,q] 是有序的，A[q+1,...,r] 也是有序的，那我们可以把问题看作是合并两个有序数组</strong></p>
+<p>在两个数组末尾追加一个 <code class="docutils literal notranslate"><span class="pre">无穷大</span></code>，追加 <code class="docutils literal notranslate"><span class="pre">无穷大</span></code> 的作用是：当其中一个数组已经 over 的时候，无需再单独判断，可以继续把另外一个数组
+的剩余元素遍历完。</p>
+<p>然后依次从 L 和 R 的第一个元素开始，比对两个数组中元素大小，并较小值加入临时数组，遍历次数为两数组长度之和。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<ul class="simple">
+<li><p>时间复杂度：O(n)，每个元素都需要比较和并移动一次</p></li>
+<li><p>空间复杂度：O(n)，临时数组容纳两个数组的所有元素</p></li>
+</ul>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+    <span class="n">left</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">))</span>
+    <span class="n">right</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">))</span>
+
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">[</span><span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">[</span><span class="n">right</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">tmp</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h4><strong>Merge Sort</strong><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
+<div class="admonition tip">
+<p class="admonition-title">小技巧</p>
+<p>我们将数组一份为二，分成两个数组，并分别递归调用 merge_sort，最后用上面的 merge 方法将排好序的两个数组合并为一个有序数组。</p>
+</div>
+<img alt="_static/images/merge_sort_func_stack.jpg" src="_static/images/merge_sort_func_stack.jpg" />
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<ul>
+<li><p>时间复杂度：O(nlogn)</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">T(n)</span> <span class="pre">=</span> <span class="pre">2*T(n/2)</span> <span class="pre">+</span> <span class="pre">O(n)</span></code>，根据主定理得出时间复杂度为 O(nlogn)，无论给定数组是否有序，正序还是逆序，
+时间复杂度都一样。</p>
+</div></blockquote>
+</li>
+<li><p>空间复杂度：O(n)</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">merge</span> <span class="pre">函数</span></code> 的空间复杂度为 O(n)，通过上图 merge_sort 函数的递归调用栈发现，merge_sort 通过不断的进栈、出栈，
+如果数组有 n 个数，则递归栈的大小为 <code class="docutils literal notranslate"><span class="pre">logn</span> <span class="pre">+</span> <span class="pre">1</span></code> ，则 merge_sort 所需的空间为 (logn + 1) * k，其中 k 为栈中元素的常量级空间，
+再加上 merge 所需的空间，<code class="docutils literal notranslate"><span class="pre">O(n)</span> <span class="pre">+</span> <span class="pre">O(logn)</span></code>，所以空间复杂度为 O(n)。</p>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">不是原地算法</span></code>，需要额外的空间开销</p></li>
+</ul>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">length</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">mid</span><span class="p">])</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">mid</span><span class="p">:])</span>
+    <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h3><strong>快速排序（Merge Sort）</strong><a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>如果数量级比较小，快速排序会比归并排序快</p></li>
+<li><p>快速排序也是基于分治思想，与归并排序不同，归并排序总是将数组一分为二，然后分别排序；
+但快速排序的 <code class="docutils literal notranslate"><span class="pre">分区点</span></code> 不一定是中点，由 partition 函数计算得到 pivot 位置</p></li>
+</ul>
+<img alt="_static/images/partition.jpg" src="_static/images/partition.jpg" />
+<p>快速排序的核心就是 <code class="docutils literal notranslate"><span class="pre">partition</span> <span class="pre">函数</span></code>，其原理是：</p>
+<blockquote>
+<div><p>我们从数组 <code class="docutils literal notranslate"><span class="pre">[p,</span> <span class="pre">...</span> <span class="pre">,r]</span></code> 中选取任意一个元素，通常选择最后一个元素作为 pivot（分区点），
+然后将 <code class="docutils literal notranslate"><span class="pre">小于</span> <span class="pre">pivot</span> <span class="pre">的元素都移到</span> <span class="pre">pivot</span> <span class="pre">左边</span></code>，将 <code class="docutils literal notranslate"><span class="pre">大于</span> <span class="pre">pivot</span> <span class="pre">的元素都移到</span> <span class="pre">pivot</span> <span class="pre">右边</span></code>，
+这样，pivot 本身是有序了，他已经找到了自己该在的位置，假设 pivot 目前的下标是 q，那么此时数组就被分为了
+三部分 <code class="docutils literal notranslate"><span class="pre">[p,</span> <span class="pre">...,</span> <span class="pre">q-1,</span> <span class="pre">q,</span> <span class="pre">q+1,</span> <span class="pre">...,</span> <span class="pre">r]</span></code>。</p>
+<p>实现方法是使用指针 i、j，快指针 j 负责遍历元素，找到小于 pivot 的元素，与慢指针 <code class="docutils literal notranslate"><span class="pre">i+1</span></code> 位置的元素进行交换，
+为什么要与 <code class="docutils literal notranslate"><span class="pre">i+1</span></code> 位置的元素交换，而不是直接将 i 与 j 位置的元素互相交换？因为此时 i、j 位置的元素都小于 pivot，
+直接交互两者，会导致将小于 pivot 的 i 位置元素又扔到了后面位置，所以使用大于 pivot 的 <code class="docutils literal notranslate"><span class="pre">i+1</span></code> 位置元素进行交换，
+可以观察到的是，完成一次交换后，<code class="docutils literal notranslate"><span class="pre">&lt;=i</span></code> 位置的元素都是小于 pivot 的，<code class="docutils literal notranslate"><span class="pre">[i+1,</span> <span class="pre">j]</span></code> 区间的元素都是大于 pivot 的。</p>
+<p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">p</span> <span class="pre">-</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">j</span> <span class="pre">=</span> <span class="pre">p</span></code>, 遍历至 <code class="docutils literal notranslate"><span class="pre">r-1</span></code>，遍历完成后返回 <code class="docutils literal notranslate"><span class="pre">i+1</span></code> 就是最后一个元素该在的位置。</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+    <span class="n">i</span><span class="o">=</span> <span class="n">low</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">high</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">high</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">high</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>有了 <code class="docutils literal notranslate"><span class="pre">partition</span></code> 函数我们就可以计算 pivot 下标，通过递归来排序</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<ul class="simple">
+<li><p>空间复杂度：O(n)</p></li>
+<li><p>时间复杂度：O(nlogn)，最坏情况下，每次分区都分出 1 个和剩余元素，就会退化为 O(n^2)</p></li>
+</ul>
+</div>
+<img alt="_static/images/quick_sort.jpeg" src="_static/images/quick_sort.jpeg" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">low</span> <span class="o">&gt;=</span> <span class="n">high</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+    <span class="n">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">pivot</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">quick_sort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">pivot</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quick_sort</span><span class="p">(</span><span class="n">arrary</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">leetcode</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../leetcode/index.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">合集</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">排序算法总结</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><strong>基于比较的算法</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bubble-sort"><code class="docutils literal notranslate"><span class="pre">冒泡排序（Bubble</span> <span class="pre">Sort）</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#insertion-sort"><code class="docutils literal notranslate"><span class="pre">插入排序（Insertion</span> <span class="pre">Sort）</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#selection-sort"><strong>选择排序（Selection Sort）</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#merge-sort"><strong>归并排序（Merge Sort）</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4"><strong>快速排序（Merge Sort）</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="binary-search.html">二分查找</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">合集</a><ul>
+      <li>Previous: <a href="index.html" title="上一章">合集</a></li>
+      <li>Next: <a href="binary-search.html" title="下一章">二分查找</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Justin.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../_sources/collections/sort.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

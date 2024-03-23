@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="zh" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>面试题06. 从尾到头打印链表 &#8212; leetcode  文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=2ccfc426"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="面试题07. 重建二叉树" href="07.html" />
+    <link rel="prev" title="面试题05. 替换空格" href="05.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>面试题06. 从尾到头打印链表<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/">https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/</a></p>
+<p>输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。</p>
+<p>示例 1：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>输入：head = [1,3,2]
+
+输出：[2,3,1]
+</pre></div>
+</div>
+<p>限制：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">链表长度</span> <span class="o">&lt;=</span> <span class="mi">10000</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="admonition tip">
+<p class="admonition-title">小技巧</p>
+<p>从尾到头打印节点，符合 <code class="docutils literal notranslate"><span class="pre">后进先出</span></code> 的特点:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>借助 <code class="docutils literal notranslate"><span class="pre">栈</span></code> 结构来实现</p></li>
+<li><p>通过天然的栈结构 <code class="docutils literal notranslate"><span class="pre">递归</span></code> 来实现，链表过长时，可能会导致栈溢出</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<ul class="simple">
+<li><p>时间复杂度：O(n)</p></li>
+<li><p>空间复杂度：O(n)，栈或者递归所需</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<p><strong>方法一</strong>：递归</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for singly-linked list.</span>
+<span class="c1"># class ListNode(object):</span>
+<span class="c1">#     def __init__(self, x):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.next = None</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">reversePrint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type head: ListNode</span>
+<span class="sd">        :rtype: List[int]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+            <span class="c1"># terminator</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="c1"># drill down</span>
+            <span class="n">recur</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+
+            <span class="c1"># process current level</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">recur</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rs</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>方法二</strong>：非递归(栈)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for singly-linked list.</span>
+<span class="c1"># class ListNode(object):</span>
+<span class="c1">#     def __init__(self, x):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.next = None</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">reversePrint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type head: ListNode</span>
+<span class="sd">        :rtype: List[int]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="n">head</span><span class="p">:</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">head</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">return</span> <span class="n">stack</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">leetcode</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../leetcode/index.html">LeetCode</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">剑指 Offer</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="03.html">面试题03. 数组中重复的数字</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05.html">面试题05. 替换空格</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">面试题06. 从尾到头打印链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07.html">面试题07. 重建二叉树</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09.html">面试题09. 用两个栈实现队列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10.html">面试题10- I. 斐波那契数列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="50.html">面试题50. 第一个只出现一次的字符</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">剑指 Offer</a><ul>
+      <li>Previous: <a href="05.html" title="上一章">面试题05. 替换空格</a></li>
+      <li>Next: <a href="07.html" title="下一章">面试题07. 重建二叉树</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Justin.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../_sources/offer/06.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

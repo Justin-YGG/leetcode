@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="zh" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>面试题05. 替换空格 &#8212; leetcode  文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=2ccfc426"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="面试题06. 从尾到头打印链表" href="06.html" />
+    <link rel="prev" title="面试题03. 数组中重复的数字" href="03.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>面试题05. 替换空格<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p><a class="reference external" href="https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/">https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/</a></p>
+<p>请实现一个函数，把字符串 s 中的每个空格替换成&quot;%20&quot;。</p>
+<p>示例 1：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>输入：s = &quot;We are happy.&quot;
+
+输出：&quot;We%20are%20happy.&quot;
+</pre></div>
+</div>
+<p>限制：</p>
+<blockquote>
+<div><p>0 &lt;= s 的长度 &lt;= 10000</p>
+</div></blockquote>
+<hr class="docutils" />
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<ul class="simple">
+<li><p>时间复杂度：O(n)</p></li>
+<li><p>空间复杂度：O(n)</p></li>
+</ul>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">replaceSpace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type s: str</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rs</span>  <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39; &#39;</span><span class="p">:</span>
+                <span class="n">rs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;%20&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">leetcode</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../leetcode/index.html">LeetCode</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">剑指 Offer</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="03.html">面试题03. 数组中重复的数字</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">面试题05. 替换空格</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06.html">面试题06. 从尾到头打印链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07.html">面试题07. 重建二叉树</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09.html">面试题09. 用两个栈实现队列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10.html">面试题10- I. 斐波那契数列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="50.html">面试题50. 第一个只出现一次的字符</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html">合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">剑指 Offer</a><ul>
+      <li>Previous: <a href="03.html" title="上一章">面试题03. 数组中重复的数字</a></li>
+      <li>Next: <a href="06.html" title="下一章">面试题06. 从尾到头打印链表</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Justin.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../_sources/offer/05.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

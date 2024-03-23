@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="zh" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>二分查找 &#8212; leetcode  文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=2ccfc426"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="程序员面试金典" href="../lcci/index.html" />
+    <link rel="prev" title="排序算法总结" href="sort.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>二分查找<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>针对有序是数据进行高效查找，可以使用二分查找，时间复杂度为 <code class="docutils literal notranslate"><span class="pre">O(n)</span></code> ，实现上类似分治思想，每次都和区间中间的值比较
+然后缩小查找区间，知道找到目标元素或者区间缩小为 0。</p>
+<p>二分查找依赖的是顺序表结构，即数组，在内存中拥有连续的数据，使用场景有一定的局限性：</p>
+<ul class="simple">
+<li><p>数据必须是有序的</p></li>
+<li><p>数据量太小的，无需使用二分查找；如果比较本身比较耗时，可以考虑使用二分查找减少比较次数</p></li>
+<li><p>数据量太大也不宜使用二分查找，需要申请大量的 <code class="docutils literal notranslate"><span class="pre">连续</span></code> 内存</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">小技巧</p>
+<p>计算中点位置时，可以用 <code class="docutils literal notranslate"><span class="pre">mid</span> <span class="pre">=</span> <span class="pre">left</span> <span class="pre">+</span> <span class="pre">(right</span> <span class="pre">-</span> <span class="pre">left)</span> <span class="pre">/</span> <span class="pre">2</span></code> ，防止数字过大时溢出</p>
+</div>
+<hr class="docutils" />
+<section id="id2">
+<h2><strong>查找某个目标元素</strong><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>递增序列，无重复元素，查找某个元素 target 在数组的中的下标。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mid</span>
+        <span class="c1"># 查找区间为 [mid+1, right]</span>
+        <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="c1"># 查找区间为 [left, mid-1]</span>
+        <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2><strong>查找某个目标第一个或左后一个出现的位置</strong><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">输入</span><span class="p">:</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="n">输出</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="n">输入</span><span class="p">:</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="n">输出</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="n">a</span>
+</pre></div>
+</div>
+<section id="target">
+<h3>查找 target 出现的第一个位置<a class="headerlink" href="#target" title="Link to this heading">¶</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">小技巧</p>
+<p>以查找 target 出现的第一个位置为例（同理，适用于查找最后一个位置）</p>
+<p><code class="docutils literal notranslate"><span class="pre">nums[mid]</span> <span class="pre">&gt;=</span> <span class="pre">target</span></code> ，我们重点分析一下这一行代码：</p>
+<ul>
+<li><p>当 <code class="docutils literal notranslate"><span class="pre">nums[mid]</span> <span class="pre">&gt;</span> <span class="pre">target</span></code> 时，显然我们要缩小查找区间，将搜索的右边界往左移动即 <code class="docutils literal notranslate"><span class="pre">right</span> <span class="pre">=</span> <span class="pre">mid</span> <span class="pre">-</span> <span class="pre">1</span></code></p></li>
+<li><p>当 <code class="docutils literal notranslate"><span class="pre">nums[mid]</span> <span class="pre">==</span> <span class="pre">target</span></code> 时，因为我们要查找元素出现的第一个位置，此时我们无法确定当前的 <code class="docutils literal notranslate"><span class="pre">target</span></code> 是否为第一个出现，
+所以我们也要向左缩小区间（因为数组是升序的，第一个位置不可能出现在当前 target 之后）；</p>
+<p>我们在第一次找到 <code class="docutils literal notranslate"><span class="pre">target</span></code> 后通过判断通过 <code class="docutils literal notranslate"><span class="pre">index</span></code> 保存了其坐标</p>
+<p>右边界在左移以后：如果下一个扫描区间 [left, mid-1] 里面仍然有 <code class="docutils literal notranslate"><span class="pre">target</span></code>，我们会在后面的逻辑里更新 <code class="docutils literal notranslate"><span class="pre">index</span></code> 的值；
+如果下个扫描区间里不再包含 <code class="docutils literal notranslate"><span class="pre">target</span></code>，那么就会一直执行 <code class="docutils literal notranslate"><span class="pre">left</span> <span class="pre">=</span> <span class="pre">mid</span> <span class="pre">+</span> <span class="pre">1</span></code> ，直到循环退出</p>
+</li>
+<li><p>如果 <code class="docutils literal notranslate"><span class="pre">target</span></code> 不存在，返回默认 index</p></li>
+</ul>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">left_bound</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># 保存并更新 target 坐标</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">mid</span>
+    <span class="k">return</span> <span class="n">index</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h3>查找 target 出现的最后一个位置<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">right_bound</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">mid</span>
+    <span class="k">return</span> <span class="n">index</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">leetcode</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../leetcode/index.html">LeetCode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../offer/index.html">剑指 Offer</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">合集</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sort.html">排序算法总结</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">二分查找</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><strong>查找某个目标元素</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><strong>查找某个目标第一个或左后一个出现的位置</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#target">查找 target 出现的第一个位置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">查找 target 出现的最后一个位置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../lcci/index.html">程序员面试金典</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">合集</a><ul>
+      <li>Previous: <a href="sort.html" title="上一章">排序算法总结</a></li>
+      <li>Next: <a href="../lcci/index.html" title="下一章">程序员面试金典</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Justin.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../_sources/collections/binary-search.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
